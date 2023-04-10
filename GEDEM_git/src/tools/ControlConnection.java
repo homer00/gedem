@@ -1,5 +1,4 @@
 package tools;
-
 import java.sql.*;
 import java.util.ArrayList;
 //import java.util.ListIterator;
@@ -39,12 +38,11 @@ public class ControlConnection {
 				
 		}
 		catch (SQLException e) {
-			System.out.println("ControlConnection : erreur au premier \"try\".  Probleme de Connection ou Statement.");
-			System.out.println("Le serveur SQL est-il démarré ?");
+			System.out.println("--Erreur au premier \"try\".  Probleme de Connection ou Statement - enfin j'imagine - je ne suis qu'une machine... Ne me jugez pas !...");
 			e.printStackTrace();
 		}
 		catch (ClassNotFoundException e) {
-			System.out.println("ControlConnection : classe introuvable : erreur de driver jdbc");
+			System.out.println("Classe introuvable : erreur de driver.");
 			e.printStackTrace();
 		}
 	}
@@ -71,11 +69,11 @@ public class ControlConnection {
 
 					}
 		catch (SQLException e) {
-			System.out.println("ControlConnection : erreur au premier \"try\".  Probleme de Connection ou Statement -> Constructeur 2");
+			System.out.println("Erreur au premier \"try\".  Probleme de Connection ou Statement -> Constructeur 2");
 			e.printStackTrace();
 		}
 		catch (ClassNotFoundException e) {
-			System.out.println("ControlConnection : classe introuvable : erreur de driver.");
+			System.out.println("Classe introuvable : erreur de driver.");
 			e.printStackTrace();
 		}
 	
@@ -125,7 +123,7 @@ public void fermerConn() {
 		st.close();
 	}
 	catch (SQLException efc){
-		System.out.println("ControlConnection : erreur de fermeture de connexion / Statement (Driver jdbc)");
+		System.out.println("Erreur de fermeture de connexion / Statement (Driver jdbc)");
 		efc.printStackTrace();
 		}
 }
