@@ -29,15 +29,15 @@ CREATE TABLE `creneau` (
   `heureFin` time NOT NULL,
   `duree` varchar(6) NOT NULL,
   `am_pm` tinyint(1) NOT NULL COMMENT '0 = matin\r\n1 = apres-midi',
-  `idFormation` int(11) unsigned NOT NULL,
-  `idMatiere_Formation` int(11) unsigned NOT NULL,
+  `idFormation` int(11) unsigned DEFAULT NULL,
+  `idMatiere_Formation` int(11) unsigned DEFAULT NULL,
   `infos` varchar(100) DEFAULT NULL COMMENT 'infos changements de salles, BTS blanc, etc',
   PRIMARY KEY (`idCreneau`),
   KEY `idFormation` (`idFormation`),
   KEY `idMatiere_idFormation` (`idMatiere_Formation`),
   CONSTRAINT `creneau_ibfk_1` FOREIGN KEY (`idFormation`) REFERENCES `formation` (`idFormation`),
   CONSTRAINT `creneau_ibfk_2` FOREIGN KEY (`idMatiere_Formation`) REFERENCES `df_matiere_formation` (`idMatiere_Formation`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +46,7 @@ CREATE TABLE `creneau` (
 
 LOCK TABLES `creneau` WRITE;
 /*!40000 ALTER TABLE `creneau` DISABLE KEYS */;
+INSERT INTO `creneau` VALUES (17,'2022-08-29','08:30:00','12:00:00','03:30',1,NULL,NULL,NULL),(18,'2022-08-29','13:30:00','17:00:00','03:30',2,NULL,NULL,NULL),(19,'2022-08-30','08:30:00','12:00:00','03:30',1,NULL,NULL,NULL),(20,'2022-08-30','13:30:00','17:00:00','03:30',2,NULL,NULL,NULL),(21,'2022-08-31','08:30:00','12:00:00','03:30',1,NULL,NULL,NULL),(22,'2022-08-31','13:30:00','17:00:00','03:30',2,NULL,NULL,NULL),(23,'2022-09-01','08:30:00','12:00:00','03:30',1,NULL,NULL,NULL),(24,'2022-09-01','13:30:00','17:00:00','03:30',2,NULL,NULL,NULL),(25,'2022-08-29','08:30:00','12:00:00','03:30',1,NULL,NULL,NULL),(26,'2022-08-29','13:30:00','17:00:00','03:30',2,NULL,NULL,NULL),(27,'2022-08-30','08:30:00','12:00:00','03:30',1,NULL,NULL,NULL),(28,'2022-08-30','13:30:00','17:00:00','03:30',2,NULL,NULL,NULL),(29,'2022-08-31','08:30:00','12:00:00','03:30',1,NULL,NULL,NULL),(30,'2022-08-31','13:30:00','17:00:00','03:30',2,NULL,NULL,NULL),(31,'2022-09-01','08:30:00','12:00:00','03:30',1,NULL,NULL,NULL),(32,'2022-09-01','13:30:00','17:00:00','03:30',2,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `creneau` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -415,4 +416,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-04-10 18:01:02
+-- Dump completed on 2023-04-17 20:48:18
