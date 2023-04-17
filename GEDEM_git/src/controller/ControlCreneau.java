@@ -1,11 +1,13 @@
 package controller;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,14 +22,14 @@ public class ControlCreneau {
 
 	private String debutFormationStr;
 	private String finFormationStr;
-	private String duree = "3h30";
-	private String heureDebut_matin = "8h30";
-	private String heureFin_matin = "12h00";
-	private String heureDebut_aprem = "13h30";
-	private String heureFin_aprem = "17h00";
+	
 	private Date debutFormation;
 	private Date finFormation;
+	private Date heureDebutMat;
+	private Date heureDebutAprem;
 	
+	
+	// java.time --> année bissextile ? boolean isLeap = year.isLeap();
 	
 	//======================================== CONSTRUCTEUR 2
 		public ControlCreneau(Date deb, Date fin) { 
@@ -45,46 +47,79 @@ public class ControlCreneau {
 	this.finFormationStr=fin;
 	
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-	LocalDateTime date1 = LocalDate.parse(debutFormationStr, dtf).atStartOfDay();
+	LocalDateTime date1 = LocalDate.parse(debutFormationStr, dtf).atStartOfDay(); // on formate date1 dd-MM-yyyy
+	
+	//LocalDateTime date1 = debutFormationStr.formatted(dtf);
 	LocalDateTime date2 = LocalDate.parse(finFormationStr, dtf).atStartOfDay();
+	System.out.println("date1 (sans formatage): "+ date1);
 	System.out.println("date 1 : "+ date1.getDayOfMonth()+"/"+date1.getMonthValue()+"/"+date1.getYear());
-	long daysBetween = Duration.between(date1, date2).toDays();
+	
+	long daysBetween = Duration.between(date1, date2).toDays(); // calcul intervalle de temps (en jours)
 	System.out.println ("Days: " + daysBetween);
 	int nbCreneaux = (int) daysBetween *2; // on double le nombre de creneaux (matin / aprem)
-
+	System.out.println("nbCreneaux: "+nbCreneaux);
 	
 	ArrayList<Creneau>ligneCreneauAm = new ArrayList<Creneau>();
 	ArrayList<Creneau>ligneCreneauPm = new ArrayList<Creneau>();
 	int cpt=1;
 	for (int i=0; i<daysBetween; i++) {
 		
-		//dateCreneau += dateCreneau;
-			LocalDateTime nextCren_matin = date1.plusDays(i);
-			LocalDateTime nextCren_aprem = date1.plusDays(i);
-			//ligneCreneauAm.add(nextCren_matin,);
-			//(nextCren_matin,heureDebut,heureFin,duree,am_pm);
+			LocalDateTime nextCren_matin = date1.plusDays(i); // on crée une valeur de date pour chaque jour de la boucle
+			LocalDateTime nextCren_aprem = date1.plusDays(i); // créneau matin puis après-midi
+			java.sql.Date nextCren_matinSql = java.sql.Date.valueOf(nextCren_matin.toLocalDate());
+			java.sql.Date nextCren_apremSql = java.sql.Date.valueOf(nextCren_aprem.toLocalDate());
+			System.out.println("sql date : "+nextCren_matinSql.toString());
+			// 11/04/2023
+			DateTimeFormatter format1 = DateTimeFormatter.ofPattern("HH:mm");
 			
-			//String duree_matin = "3h30";
-			//String duree_aprem = "3h30";
+		//LocalDateTime heureDebutMat = LocalDateTime.parse(Creneau.heureDebut_matin, format1);
+		//java.sql.Time timeValue = new Time(Creneau.heureDebut_matin);
 			
+			// heureDebut_matin : format String, attribut de la classe creneau
+			LocalTime heureDebutMat = LocalTime.parse((Creneau.heureDebut_matin));
+			LocalTime heureFinMat = LocalTime.parse((Creneau.heureFin_matin));
+			LocalTime heureDebutAprem = LocalTime.parse((Creneau.heureDebut_aprem));
+			LocalTime heureFinAprem = LocalTime.parse((Creneau.heureFin_aprem));
+			
+			
+			//LocalDateTime heureFinMat = LocalDateTime.parse(Creneau.heureFin_matin, format1);
+			//LocalDateTime heureDebutAprem = LocalDateTime.parse(Creneau.heureDebut_aprem, format1);
+			//LocalDateTime heureFinAprem = LocalDateTime.parse(Creneau.heureFin_aprem, format1);
+			
+			//System.out.println("heureDebuMat : "+heureDebutMat);
+			//String heureDebutMatStr = heureDebutMat.format(format1);
+			//System.out.println("heureDebutMatStr : "+heureDebutMatStr);
+			
+			/*	
 			String requete1="INSERT INTO creneau (dateCreneau,heureDebut,heureFin,duree,am_pm)"
-					+ " VALUES ("+nextCren_matin+","+heureDebut_matin+","+heureFin_matin+","+duree+","+1+");";
-			
+					+ " VALUES ("+nextCren_matin+","+heureDebutMat+","+heureFinMat+","+Creneau.dureeStr+","+1+");";
+			System.out.println("requete1 : "+ requete1);
+	
 			String requete2="INSERT INTO creneau (dateCreneau,heureDebut,heureFin,duree,am_pm)"
-					+ " VALUES ("+nextCren_aprem+","+heureDebut_aprem+","+heureFin_aprem+","+duree+","+2+");";
+					+ " VALUES ("+nextCren_aprem+","+heureDebutAprem+","+heureFinAprem+","+Creneau.dureeStr+","+2+");";
+					*/
+			String requete1="INSERT INTO creneau (dateCreneau,heureDebut,heureFin,duree,am_pm)"
+					+ " VALUES ('"+nextCren_matinSql+"','"+heureDebutMat+"','"+heureFinMat+"','"+Creneau.dureeStr+"',1);";
+			String requete2="INSERT INTO creneau (dateCreneau,heureDebut,heureFin,duree,am_pm)"
+					+ " VALUES ('"+nextCren_apremSql+"','"+heureDebutAprem+"','"+heureFinAprem+"','"+Creneau.dureeStr+"',2);";
+			
 			ControlConnection cc = new ControlConnection();
+			
 			try {
 				cc.getStatement().executeUpdate(requete1);
 			} catch (SQLException e) {
 				System.out.println("Erreur d'execution de la requete1, creneau");
 				e.printStackTrace();
 			}
+			
 			try {
 				cc.getStatement().executeUpdate(requete2);
 			} catch (SQLException e) {
 				System.out.println("ControlCreneau : Erreur d'execution de la requete2, creneau");
 				e.printStackTrace();
 			}
+			
+	
 			
 			System.out.println("Creneau "+cpt+" : " +nextCren_matin.format(dtf));
 			cpt++;
@@ -117,8 +152,8 @@ public class ControlCreneau {
 
 			String[] patternSplit = lecture.next(pattern).split("/");	// on sépare la date saisie en 3 parties, on range le résultat dans un tableau.
 			patternSplit[0] = patternSplit[0].length()<2 ? "0"+patternSplit[0] : patternSplit[0]; // on rajoute un 0 au jour si moins de 2 chiffres (opérateur ternaire)
-			patternSplit[1] = patternSplit[1].length()<2 ? "0"+patternSplit[0] : patternSplit[1]; // idem pour le mois
-			patternSplit[2] = patternSplit[0].length()<4 ? "20"+patternSplit[0] : patternSplit[2]; // on rajoute "20" devant l'année si elle fait moins de 4 caractères
+			patternSplit[1] = patternSplit[1].length()<2 ? "0"+patternSplit[1] : patternSplit[1]; // idem pour le mois
+			patternSplit[2] = patternSplit[0].length()<4 ? "20"+patternSplit[2] : patternSplit[2]; // on rajoute "20" devant l'année si elle fait moins de 4 caractères
 			String dateCreneauStr = patternSplit[0]+"/"+patternSplit[1]+"/"+patternSplit[2];  // on déclare une chaine qui récupère la nouvelle valeur de dateCreneau
 			
 			try {

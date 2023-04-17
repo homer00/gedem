@@ -1,4 +1,5 @@
 package tools;
+
 import java.sql.*;
 import java.util.ArrayList;
 //import java.util.ListIterator;
@@ -9,8 +10,8 @@ public class ControlConnection {
 
 
 	private String dbName="gedem" ;
-	//private String sql_host = "localhost";
-	private String sql_host = "192.168.1.121";
+	private String sql_host = "localhost";
+	//private String sql_host = "192.168.1.121";
 	private String dao_strClassName = "com.mysql.cj.jdbc.Driver";
 	private String loginDb = "root";
 	private String passwordDb = "root";
@@ -18,10 +19,10 @@ public class ControlConnection {
 	private Connection conn;
 	private Statement st;
 	
-	
+	// >>>>>>>>>>>> PENSER A MODIFIER l'utilisateur (root) et password (root) en fonction de votre base de donnée.
 	
 	/**
-	 *  EL CONSTRUCTOR...
+	 *  EL CONSTRUCTOR... 
 	 * @param dao_db
 	 * @param dao_login
 	 * @param dao_password
@@ -38,11 +39,12 @@ public class ControlConnection {
 				
 		}
 		catch (SQLException e) {
-			System.out.println("--Erreur au premier \"try\".  Probleme de Connection ou Statement - enfin j'imagine - je ne suis qu'une machine... Ne me jugez pas !...");
+			System.out.println("ControlConnection : erreur au premier \"try\".  Probleme de Connection ou Statement.");
+			System.out.println("Le serveur SQL est-il démarré ?");
 			e.printStackTrace();
 		}
 		catch (ClassNotFoundException e) {
-			System.out.println("Classe introuvable : erreur de driver.");
+			System.out.println("ControlConnection : classe introuvable : erreur de driver jdbc");
 			e.printStackTrace();
 		}
 	}
@@ -69,11 +71,11 @@ public class ControlConnection {
 
 					}
 		catch (SQLException e) {
-			System.out.println("Erreur au premier \"try\".  Probleme de Connection ou Statement -> Constructeur 2");
+			System.out.println("ControlConnection : erreur au premier \"try\".  Probleme de Connection ou Statement -> Constructeur 2");
 			e.printStackTrace();
 		}
 		catch (ClassNotFoundException e) {
-			System.out.println("Classe introuvable : erreur de driver.");
+			System.out.println("ControlConnection : classe introuvable : erreur de driver.");
 			e.printStackTrace();
 		}
 	
@@ -123,7 +125,7 @@ public void fermerConn() {
 		st.close();
 	}
 	catch (SQLException efc){
-		System.out.println("Erreur de fermeture de connexion / Statement (Driver jdbc)");
+		System.out.println("ControlConnection : erreur de fermeture de connexion / Statement (Driver jdbc)");
 		efc.printStackTrace();
 		}
 }

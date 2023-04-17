@@ -23,6 +23,11 @@ public class Creneau {
 	private ArrayList<Creneau> listeCreneau;
 	//private Date debutFormation;
 	//private Date finFormation;
+	public static String dureeStr = "03:30";
+	public static String heureDebut_matin = "08:30";
+	public static String heureFin_matin = "12:00";
+	public static String heureDebut_aprem = "13:30";
+	public static String heureFin_aprem = "17:00";
 
 public Creneau(Date dateCreneau, String heureDebut, String heureFin, Date duree) {
 	this.dateCreneau = dateCreneau;
