@@ -12,7 +12,7 @@ public class TestDate {
 	public static void main(String[] args) {
 
 try {
-	ControlCreneau cren = new ControlCreneau("29-08-2022","02-09-2022");
+	ControlCreneau cren = new ControlCreneau("29-08-2022","30-08-2022");
 } 
 catch (ParseException e) {
 	System.out.println("Erreur dans la creation de l instance cd ControlCreneau");

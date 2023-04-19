@@ -1,5 +1,6 @@
 package controller;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.text.ParseException;
@@ -68,12 +69,12 @@ public class ControlCreneau {
 			LocalDateTime nextCren_aprem = date1.plusDays(i); // créneau matin puis après-midi
 			java.sql.Date nextCren_matinSql = java.sql.Date.valueOf(nextCren_matin.toLocalDate());
 			java.sql.Date nextCren_apremSql = java.sql.Date.valueOf(nextCren_aprem.toLocalDate());
-			System.out.println("sql date : "+nextCren_matinSql.toString());
+			//System.out.println("sql date : "+nextCren_matinSql.toString());
 			// 11/04/2023
 			DateTimeFormatter format1 = DateTimeFormatter.ofPattern("HH:mm");
 			
-		//LocalDateTime heureDebutMat = LocalDateTime.parse(Creneau.heureDebut_matin, format1);
-		//java.sql.Time timeValue = new Time(Creneau.heureDebut_matin);
+	
+			//java.sql.Time timeValue = new Time(Creneau.heureDebut_matin);
 			
 			// heureDebut_matin : format String, attribut de la classe creneau
 			LocalTime heureDebutMat = LocalTime.parse((Creneau.heureDebut_matin));
@@ -81,39 +82,43 @@ public class ControlCreneau {
 			LocalTime heureDebutAprem = LocalTime.parse((Creneau.heureDebut_aprem));
 			LocalTime heureFinAprem = LocalTime.parse((Creneau.heureFin_aprem));
 			
+			// vérification de la présence de créneaux dans la BDD pour empêcher les doublons.
 			
-			//LocalDateTime heureFinMat = LocalDateTime.parse(Creneau.heureFin_matin, format1);
-			//LocalDateTime heureDebutAprem = LocalDateTime.parse(Creneau.heureDebut_aprem, format1);
-			//LocalDateTime heureFinAprem = LocalDateTime.parse(Creneau.heureFin_aprem, format1);
+			String req_verif_doublons="SELECT dateCreneau FROM creneau;";
+			ControlConnection cc = new ControlConnection();
+			try {
+				ResultSet rs1 = cc.getStatement().executeQuery(req_verif_doublons);
+				while (rs1.next()) {
+					//System.out.println("X\t");
+					
+				}
+			} catch (SQLException e1) {
+				System.out.println("Erreur au moment de la verif de doublons");
+				e1.printStackTrace();
+			}
 			
-			//System.out.println("heureDebuMat : "+heureDebutMat);
-			//String heureDebutMatStr = heureDebutMat.format(format1);
-			//System.out.println("heureDebutMatStr : "+heureDebutMatStr);
 			
-			/*	
-			String requete1="INSERT INTO creneau (dateCreneau,heureDebut,heureFin,duree,am_pm)"
-					+ " VALUES ("+nextCren_matin+","+heureDebutMat+","+heureFinMat+","+Creneau.dureeStr+","+1+");";
-			System.out.println("requete1 : "+ requete1);
-	
-			String requete2="INSERT INTO creneau (dateCreneau,heureDebut,heureFin,duree,am_pm)"
-					+ " VALUES ("+nextCren_aprem+","+heureDebutAprem+","+heureFinAprem+","+Creneau.dureeStr+","+2+");";
-					*/
+			
+			
+			
+			
+			//==================== INSERTION ==============
 			String requete1="INSERT INTO creneau (dateCreneau,heureDebut,heureFin,duree,am_pm)"
 					+ " VALUES ('"+nextCren_matinSql+"','"+heureDebutMat+"','"+heureFinMat+"','"+Creneau.dureeStr+"',1);";
 			String requete2="INSERT INTO creneau (dateCreneau,heureDebut,heureFin,duree,am_pm)"
 					+ " VALUES ('"+nextCren_apremSql+"','"+heureDebutAprem+"','"+heureFinAprem+"','"+Creneau.dureeStr+"',2);";
 			
-			ControlConnection cc = new ControlConnection();
+			//ControlConnection cc = new ControlConnection();
 			
 			try {
-				cc.getStatement().executeUpdate(requete1);
+				cc.getStatement().executeUpdate(requete1); // INSERTION CRENEAU MATIN
 			} catch (SQLException e) {
 				System.out.println("Erreur d'execution de la requete1, creneau");
 				e.printStackTrace();
 			}
 			
 			try {
-				cc.getStatement().executeUpdate(requete2);
+				cc.getStatement().executeUpdate(requete2); // INSERTION CRENEAU APRES-MIDI
 			} catch (SQLException e) {
 				System.out.println("ControlCreneau : Erreur d'execution de la requete2, creneau");
 				e.printStackTrace();

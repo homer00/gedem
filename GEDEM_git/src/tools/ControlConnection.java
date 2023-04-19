@@ -10,8 +10,8 @@ public class ControlConnection {
 
 
 	private String dbName="gedem" ;
-	private String sql_host = "localhost";
-	//private String sql_host = "192.168.1.121";
+	//private String sql_host = "localhost";
+	private String sql_host = "192.168.1.121";
 	private String dao_strClassName = "com.mysql.cj.jdbc.Driver";
 	private String loginDb = "root";
 	private String passwordDb = "root";
