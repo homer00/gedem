@@ -28,6 +28,7 @@ public class ControlCreneau {
 	private Date finFormation;
 	private Date heureDebutMat;
 	private Date heureDebutAprem;
+	boolean  doublons_cren_flag = false;
 	
 	
 	// java.time --> année bissextile ? boolean isLeap = year.isLeap();
@@ -82,25 +83,36 @@ public class ControlCreneau {
 			LocalTime heureDebutAprem = LocalTime.parse((Creneau.heureDebut_aprem));
 			LocalTime heureFinAprem = LocalTime.parse((Creneau.heureFin_aprem));
 			
-			// vérification de la présence de créneaux dans la BDD pour empêcher les doublons.
+			// vérification de la présence de créneaux dans la BDD pour empêcher les doublons. =============  DOUBLONS ?
 			
-			String req_verif_doublons="SELECT dateCreneau FROM creneau;";
+			String req_verif_doublons="SELECT COUNT(dateCreneau) from creneau GROUP BY dateCreneau;";
+			// la requete compte le nombre de dates de créneau identiques, qui doit être au maximum de 2 par jour. (matin, aprem)
+			
 			ControlConnection cc = new ControlConnection();
 			try {
 				ResultSet rs1 = cc.getStatement().executeQuery(req_verif_doublons);
+				ArrayList<Integer> doublons_cren = new ArrayList<Integer>();
+				
+				
 				while (rs1.next()) {
 					//System.out.println("X\t");
-					
+					doublons_cren.add(rs1.getInt(1));
+					System.out.println("boucle rs1 : "+String.valueOf(rs1.getInt(1))); // conv int -> String
 				}
-			} catch (SQLException e1) {
+				for (i = 0; i<doublons_cren.size();i++) { // on parcourt l'ArrayList des doublons
+				if (doublons_cren.get(i)>2) { // si il y a plus de 2 dates de creneau dans la liste
+					doublons_cren_flag = true; // drapeau pour tester présence de doublons
+					System.out.println("flag : detection presence de creneaux en double (>2)");
+				}
+				else { doublons_cren_flag = false; }
+				}
+	
+				}
+			catch (SQLException e1) {
 				System.out.println("Erreur au moment de la verif de doublons");
 				e1.printStackTrace();
 			}
-			
-			
-			
-			
-			
+
 			
 			//==================== INSERTION ==============
 			String requete1="INSERT INTO creneau (dateCreneau,heureDebut,heureFin,duree,am_pm)"
@@ -111,14 +123,22 @@ public class ControlCreneau {
 			//ControlConnection cc = new ControlConnection();
 			
 			try {
+				if (!doublons_cren_flag) { // exécution de la requête si absence de doublon
 				cc.getStatement().executeUpdate(requete1); // INSERTION CRENEAU MATIN
+				}
+				else {
+					System.out.println("Dates de creneau en double : abandon.");
+				}
 			} catch (SQLException e) {
 				System.out.println("Erreur d'execution de la requete1, creneau");
 				e.printStackTrace();
 			}
 			
 			try {
+				if (!doublons_cren_flag) { // exécution de la requête si absence de doublon
 				cc.getStatement().executeUpdate(requete2); // INSERTION CRENEAU APRES-MIDI
+				}
+				
 			} catch (SQLException e) {
 				System.out.println("ControlCreneau : Erreur d'execution de la requete2, creneau");
 				e.printStackTrace();
