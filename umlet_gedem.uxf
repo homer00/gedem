@@ -23,31 +23,29 @@ fg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>60</x>
-      <y>160</y>
+      <x>430</x>
+      <y>150</y>
       <w>370</w>
       <h>310</h>
     </coordinates>
-    <panel_attributes>Classe "Personne"
+    <panel_attributes>Classe "Role"
 --
-- int idPersonne
-- int idRole
-- String nom
-- String prenom
-- String mail
-- String tel
-- String login
-- String password
+# int idRole
+# String nomRole
+# ControlConnection ccr
+# static Vector&lt;String&gt; vectorRole
 --
-*Constructeur principal*
-+Personne(int idRole, String n, String p,
-   String m, String t, String login, String password)
-*Méthodes principales (getters)*
-+String getIdPersonne()
-+String getNom()
-+String getPrenom()
-+String getMail()
-+String getTel()
+*Constructeurs*
++role(int id, String n)
++role()
+*Méthodes*
++Vector&lt;String&gt;listerRole()
++int getIdRole
++void setIdRole(int idRole)
++ControlConnection getCcr()
++void setCcr(ControlConnection ccr)
++Vector&lt;String&gt; getVectorRole()
++void setVectorRole(Vector&lt;String&gt; vectorRole)
 
 
 
@@ -75,6 +73,40 @@ _-ClassAttribute: Long_
 Responsibilities
 -- Resp1
 *-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>30</x>
+      <y>150</y>
+      <w>370</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>Classe "Personne"
+--
+- int idPersonne
+- int idRole
+- String nom
+- String prenom
+- String mail
+- String tel
+- String login
+- String password
+--
+*Constructeur principal*
++Personne(int idRole, String n, String p,
+   String m, String t, String login, String password)
+*Méthodes principales (getters)*
++String getIdPersonne()
++String getNom()
++String getPrenom()
++String getMail()
++String getTel()
+
+
+
+</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>
