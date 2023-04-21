@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="13.3">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLPackage</id>
+    <coordinates>
+      <x>30</x>
+      <y>10</y>
+      <w>140</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>Package "model"
+--
+Creneau
+Formation
+Personne
+Stagiaire
+Role
+bg=gray
+fg=red</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>160</y>
+      <w>370</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>Classe "Personne"
+--
+- int idPersonne
+- int idRole
+- String nom
+- String prenom
+- String mail
+- String tel
+- String login
+- String password
+--
+*Constructeur principal*
++Personne(int idRole, String n, String p,
+   String m, String t, String login, String password)
+*Méthodes principales (getters)*
++String getIdPersonne()
++String getNom()
++String getPrenom()
++String getMail()
++String getTel()
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>390</x>
+      <y>580</y>
+      <w>210</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;Stereotype&gt;&gt;
+Package::FatClass
+{Some Properties}
+--
+-id: Long
+_-ClassAttribute: Long_
+--
+#Operation(i: int): int
+/+AbstractOperation()/
+--
+Responsibilities
+-- Resp1
+*-- Resp2*</panel_attributes>
+    <additional_attributes/>
+  </element>
+</diagram>
