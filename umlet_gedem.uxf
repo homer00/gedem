@@ -9,8 +9,9 @@
       <w>140</w>
       <h>120</h>
     </coordinates>
-    <panel_attributes>Package "model"
+    <panel_attributes>*Package "model"*
 --
+
 Creneau
 Formation
 Personne
@@ -23,56 +24,30 @@ fg=red</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>430</x>
-      <y>150</y>
+      <x>70</x>
+      <y>500</y>
       <w>370</w>
       <h>310</h>
     </coordinates>
-    <panel_attributes>Classe "Role"
+    <panel_attributes>*Classe "Formation"*
 --
-# int idRole
-# String nomRole
-# ControlConnection ccr
-# static Vector&lt;String&gt; vectorRole
+-int idFormation
+-String intituleFormation
+-Date debutFormation
+-Date finFormation
 --
-*Constructeurs*
-+role(int id, String n)
-+role()
+*Constructeur*
++Formation(int idf, String ifor, Date df, Date ff)
 *Méthodes*
-+Vector&lt;String&gt;listerRole()
-+int getIdRole
-+void setIdRole(int idRole)
-+ControlConnection getCcr()
-+void setCcr(ControlConnection ccr)
-+Vector&lt;String&gt; getVectorRole()
-+void setVectorRole(Vector&lt;String&gt; vectorRole)
++int getIdFormation()
++void setIdFormation(int idFormation)
++String getIntituleFormation()
++void SetIntituleFormation(String intituleFormation)
+
 
 
 
 </panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>390</x>
-      <y>580</y>
-      <w>210</w>
-      <h>190</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;Stereotype&gt;&gt;
-Package::FatClass
-{Some Properties}
---
--id: Long
-_-ClassAttribute: Long_
---
-#Operation(i: int): int
-/+AbstractOperation()/
---
-Responsibilities
--- Resp1
-*-- Resp2*</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -83,7 +58,7 @@ Responsibilities
       <w>370</w>
       <h>310</h>
     </coordinates>
-    <panel_attributes>Classe "Personne"
+    <panel_attributes>*Classe "Personne"*
 --
 - int idPersonne
 - int idRole
@@ -103,6 +78,38 @@ Responsibilities
 +String getPrenom()
 +String getMail()
 +String getTel()
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>450</x>
+      <y>170</y>
+      <w>370</w>
+      <h>310</h>
+    </coordinates>
+    <panel_attributes>*Classe "Role"*
+--
+# int idRole
+# String nomRole
+# ControlConnection ccr
+# static Vector&lt;String&gt; vectorRole
+--
+*Constructeurs*
++role(int id, String n)
++role()
+*Méthodes*
++Vector&lt;String&gt;listerRole()
++int getIdRole
++void setIdRole(int idRole)
++ControlConnection getCcr()
++void setCcr(ControlConnection ccr)
++Vector&lt;String&gt; getVectorRole()
++void setVectorRole(Vector&lt;String&gt; vectorRole)
 
 
 
