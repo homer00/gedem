@@ -10,8 +10,8 @@ public class ControlConnection {
 
 
 	private String dbName="gedem" ;
-	private String sql_host = "localhost";
-	//private String sql_host = "192.168.1.121";
+	//private String sql_host = "localhost";
+	private String sql_host = "192.168.1.121";
 	private String dao_strClassName = "com.mysql.cj.jdbc.Driver";
 	private String loginDb = "root";
 	private String passwordDb = "root";
@@ -116,13 +116,15 @@ public class ControlConnection {
 	// =========================================== fermerConn()	
 	/**
 	 *  Fonction fermerConn()
+	 *  Fermeture de la connexion mysql:jdbc
+	 *  Fermeture du Statement instancié à partir de cette connexion
 	 *  @param
 	 *  {@summary}
 	 */
 public void fermerConn() {
 	try {
-		conn.close();
-		st.close();
+		getConn().close();
+		getStatement().close();
 	}
 	catch (SQLException efc){
 		System.out.println("ControlConnection : erreur de fermeture de connexion / Statement (Driver jdbc)");

@@ -128,6 +128,16 @@ public class ControlCreneau {
 				}
 				else {
 					System.out.println("Dates de creneau en double : abandon.");
+					
+					// optionnel : rajouté pour vérifier l'état de la connexion / statement
+						cc.fermerConn();
+						if (cc != null ) {
+							System.out.println("la connexion à la BDD n'est pas \"null\".");
+						}
+						if (!cc.getConn().isClosed()) {
+						System.out.println("la connexion à la bdd n'est pas fermée.");
+						}
+					// fin rajout vérif connexion
 				}
 			} catch (SQLException e) {
 				System.out.println("Erreur d'execution de la requete1, creneau");
@@ -145,13 +155,13 @@ public class ControlCreneau {
 			}
 			
 	
-			
+			// Listing des créneaux en cours de création
 			System.out.println("Creneau "+cpt+" : " +nextCren_matin.format(dtf));
 			cpt++;
 			System.out.println("Creneau "+cpt+" : " +nextCren_aprem.format(dtf) );
 			cpt++;
 			
-	}
+	} // fin de boucle for
 	
 	
 	

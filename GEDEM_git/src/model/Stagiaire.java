@@ -1,127 +1,78 @@
 package model;
 
-import java.util.*;
-import javax.swing.*;
-import java.awt.*;
-import java.io.IOException;
-/**
- * 
- * @author greta
- *
- */
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.List;
+import java.util.Vector;
 
-public class Stagiaire  {
-	
-	//private int idStagiaire;
-	private int idFormation;
-	private Formation formation;
-	//private ArrayList<Creneau>  listeCreneauxPresent;
-	//private ArrayList<Creneau>  listeCreneauxAbsent;
+import com.mysql.cj.xdevapi.Statement;
 
-	private String nomStagiaire;
-	private String prenomStagiaire;
-	private String telStagiaire;
-	private String mailStagiaire;
-	private String roleStagiaire;
-	private ArrayList<Stagiaire> listeStagiaire;
+import tools.ControlConnection;
+
+public class Stagiaire {
+	// Mysql : h_personne_stagiaire
+	private int idStagiaire;
+	private int idPersonne;
+	ControlConnection cc;
 	
-	/**
-	 * CONSTRUCTEUR 1
-	 * 
-	 * @param ids
-	 * @param ns
-	 * @param ps
-	 * @param tels
-	 * @param mls
-	 */
-	public Stagiaire(int ids, String ns, String ps, String tels, String mls, String rstag) {
-		this.nomStagiaire = ns;
-		this.prenomStagiaire = ps;
-		this.telStagiaire = tels;
-		this.mailStagiaire = mls;
-		this.roleStagiaire = rstag;
-		this.listeStagiaire = new ArrayList<Stagiaire>();
-					
+	
+	
+	public Stagiaire(int idStagiaire, int idPersonne) {
+		this.idStagiaire = idStagiaire;
+		this.idPersonne = idPersonne;
+		
 	}
 	
-		public Stagiaire(Formation form,int ids, String ns, String ps, String tels, String mls) {
-			this.nomStagiaire = ns;
-			this.prenomStagiaire = ps;
-			this.telStagiaire = tels;
-			this.mailStagiaire = mls;
-						
+	public void afficheStagiaires() {
+		
+		// requete SQL pour sélectionner l'ensemble des stagiaires
+		String reqAS = "SELECT p.nom,p.prenom,s.idStagiaire FROM Personne p JOIN h_personne_stagiaire s USING (idPersonne) WHERE idRole='3'";
+		// Dans la table role, idRole=3 correspond à "User", qui est le rôle correspondant aux stagiaires.
+		
+		try {
+			cc = new ControlConnection();
+			ResultSet rs = cc.getStatement().executeQuery(reqAS);
+			while (rs.next()) {
+				System.out.println("Nom : "+rs.getString(1)+"\tPrenom : "+rs.getString(2)+"\tid Stagiaire : "+rs.getInt(3));
+			}
 		}
+		catch (SQLException e){
+			System.out.println("Erreur SQL - Classe Stagiaire");
+			e.printStackTrace();
+			 
+		}
+
+		/*
+		Vector vec1 = new Vector();
+		Collections.addAll(vec1,aList);
+		String affStag="";
 		
 		
-		public Stagiaire(Formation form,int ids, String ns, String ps, String mls) {
-			
-			this.nomStagiaire = ns;
-			this.prenomStagiaire = ps;
-			this.mailStagiaire = mls;
-			
-						
-		}
-
-		public int getIdFormation() {
-			return idFormation;
-		}
-
-		public void setIdFormation(int idFormation) {
-			this.idFormation = idFormation;
-		}
-
-		public String getNomStagiaire() {
-			return nomStagiaire;
-		}
-
-		public void setNomStagiaire(String nomStagiaire) {
-			this.nomStagiaire = nomStagiaire;
-		}
-
-		public String getPrenomStagiaire() {
-			return prenomStagiaire;
-		}
-
-		public void setPrenomStagiaire(String prenomStagiaire) {
-			this.prenomStagiaire = prenomStagiaire;
-		}
-
-		public String getTelStagiaire() {
-			return telStagiaire;
-		}
-
-		public void setTelStagiaire(String telStagiaire) {
-			this.telStagiaire = telStagiaire;
-		}
-
-		public String getMailStagiaire() {
-			return mailStagiaire;
-		}
-
-		public void setMailStagiaire(String mailStagiaire) {
-			this.mailStagiaire = mailStagiaire;
-		}
-
-		public ArrayList<Stagiaire> getListeStagiaire() {
-			return listeStagiaire;
-		}
-
-		public void setListeStagiaire(ArrayList<Stagiaire> listeStagiaire) {
-			this.listeStagiaire = listeStagiaire;
+		for (int i=0; i<vec1.size();i++) {
+			affStag += vec1.get(i);
 		}
 		
+		return affStag;
+		//Connection
 
-		public String getRoleStagiaire() {
-			return roleStagiaire;
-		}
+	*/
+		
+	}
 
-		protected void afficheStagiaire(int id) {
-System.out.println("Vous avez entre : "+this.idFormation+", "+this.nomStagiaire+", "+this.prenomStagiaire+", ");
+	//=========================================  ACCESSEURS
+	int getIdStagiaire() {
+		return this.idStagiaire;
+	}
+	int getIdPersonne() {
+		return this.idPersonne;
+	}
+	void setIdStagiaire(int ids) {
+		this.idStagiaire = ids;
+	}
+	void setIdPersonne(int idp) {
+		this.idPersonne = idp;
+	}
+	
 }
-}
-	
-	
-	
-	
-	
-

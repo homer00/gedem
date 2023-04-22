@@ -4,13 +4,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Stagiaire;
+import model.Stagiaire_old;
 import tools.ControlConnection;
 //extends ControlConnection
 public class ControlStagiaire  {
 	// comme on hérite de ControlerConnection, on peut récupérer les attributs
 	// et les méthodes de la classe mère, comme les connection, statement,...
-	private ArrayList<Stagiaire> listeStagiaire;
+	private ArrayList<Stagiaire_old> listeStagiaire;
 	public ControlConnection ccs; // on déclare l'instance de ControllerConnection
 	// qui permet de se connecter à la BDD
 	
@@ -20,7 +20,7 @@ public class ControlStagiaire  {
 	 */
 	public ControlStagiaire() {
 	ccs = new ControlConnection("gedem","root","root"); 
-	listeStagiaire = new ArrayList<Stagiaire>();
+	listeStagiaire = new ArrayList<Stagiaire_old>();
 	}
 	/**
 	 * =========================================== CONSTRUCTEUR2
@@ -30,7 +30,7 @@ public class ControlStagiaire  {
 	 */
 	public ControlStagiaire(String db, String login, String pass) {
 	ccs = new ControlConnection(db,login,pass); 
-	listeStagiaire = new ArrayList<Stagiaire>();
+	listeStagiaire = new ArrayList<Stagiaire_old>();
 	}
 	
 	
@@ -53,7 +53,7 @@ public class ControlStagiaire  {
 			
 			while (rs.next()) {
 				
-		listeStagiaire.add(new Stagiaire(rs.getInt(1),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
+		listeStagiaire.add(new Stagiaire_old(rs.getInt(1),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)));
 			}
 					
 		for (int i=0;i<listeStagiaire.size(); i++) {

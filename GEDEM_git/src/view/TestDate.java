@@ -1,5 +1,6 @@
 package view;
 
+import model.Stagiaire;
 import java.text.ParseException;
 
 import controller.ControlCreneau;
@@ -12,6 +13,8 @@ public class TestDate {
 	public static void main(String[] args) {
 
 try {
+	Stagiaire st1 = new Stagiaire(2,2);
+	st1.afficheStagiaires();
 	ControlCreneau cren = new ControlCreneau("29-08-2022","30-08-2022");
 } 
 catch (ParseException e) {
