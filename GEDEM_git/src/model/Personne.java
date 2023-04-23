@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Vector;
+
 public class Personne {
 
 	private int idPersonne;
@@ -10,6 +12,11 @@ public class Personne {
 	private String tel;
 	private String login;
 	private String password;
+	
+
+public Personne(){
+	// constructeur vide pour les héritages Stagiaire, Administratif, Formateur
+}
 	
 	public Personne(String n, String p, String m, String t) {
 		
@@ -38,13 +45,30 @@ public Personne(int idRole,String n, String p, String m, String t) {
 }
 	
 public Personne(int idRole, String n, String p, String m, String t, String login, String password) {
-		
+	// reprend tous les champs de la table, sauf le premier (idPersonne, auto-incrémenté)	
 		this.nom = n;
 		this.prenom = p;
 		this.mail = m;
 		this.tel = t;
 		
 	}
+
+public void show1Personn() {
+	// méthode pout test héritage Personne > Stagiaire
+	Personne pTest = new Personne();
+	pTest.idRole = 3;
+	pTest.nom = "Richard";
+	pTest.prenom = "Pierre";
+	Vector<String> vec = new Vector<String>();
+	vec.add(String.valueOf(pTest.idRole));vec.add(pTest.nom);vec.add(pTest.prenom);
+	System.out.print("Méthode test --> La personne : ");
+	for (int i=0; i<vec.size(); i++) {
+		System.out.print(vec.elementAt(i)+" ");
+	}
+	
+}
+
+//========================================= ACCESSEURS
 
 	public int getIdPersonne() {
 		return idPersonne;

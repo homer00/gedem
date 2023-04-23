@@ -7,21 +7,29 @@ import java.util.Enumeration;
 import java.util.List;
 import java.util.Vector;
 
+
 import com.mysql.cj.xdevapi.Statement;
 
 import tools.ControlConnection;
 
-public class Stagiaire {
-	// Mysql : h_personne_stagiaire
+/**
+ *  Sous-classe de "Personne"
+ *  Mysql : h_personne_stagiaire
+ * @author hs
+ *
+ */
+public class Stagiaire extends Personne{  
 	private int idStagiaire;
 	private int idPersonne;
 	ControlConnection cc;
-	
-	
+
 	
 	public Stagiaire(int idStagiaire, int idPersonne) {
+		super(); // appel du constructeur vide parent
 		this.idStagiaire = idStagiaire;
 		this.idPersonne = idPersonne;
+		// test d'appel d'une méthode de la Classe mère (Personne) :
+		show1Personn();
 		
 	}
 	
@@ -44,34 +52,20 @@ public class Stagiaire {
 			 
 		}
 
-		/*
-		Vector vec1 = new Vector();
-		Collections.addAll(vec1,aList);
-		String affStag="";
-		
-		
-		for (int i=0; i<vec1.size();i++) {
-			affStag += vec1.get(i);
-		}
-		
-		return affStag;
-		//Connection
-
-	*/
 		
 	}
 
 	//=========================================  ACCESSEURS
-	int getIdStagiaire() {
+	public int getIdStagiaire() {
 		return this.idStagiaire;
 	}
-	int getIdPersonne() {
+	public int getIdPersonne() {
 		return this.idPersonne;
 	}
-	void setIdStagiaire(int ids) {
+	public void setIdStagiaire(int ids) {
 		this.idStagiaire = ids;
 	}
-	void setIdPersonne(int idp) {
+	public void setIdPersonne(int idp) {
 		this.idPersonne = idp;
 	}
 	

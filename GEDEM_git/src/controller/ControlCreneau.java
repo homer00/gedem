@@ -53,13 +53,13 @@ public class ControlCreneau {
 	
 	//LocalDateTime date1 = debutFormationStr.formatted(dtf);
 	LocalDateTime date2 = LocalDate.parse(finFormationStr, dtf).atStartOfDay();
-	System.out.println("date1 (sans formatage): "+ date1);
-	System.out.println("date 1 : "+ date1.getDayOfMonth()+"/"+date1.getMonthValue()+"/"+date1.getYear());
+	System.out.print("\ndate1 (sans formatage): "+ date1);
+	System.out.print("\tdate 1 : "+ date1.getDayOfMonth()+"/"+date1.getMonthValue()+"/"+date1.getYear()+"\t");
 	
 	long daysBetween = Duration.between(date1, date2).toDays(); // calcul intervalle de temps (en jours)
-	System.out.println ("Days: " + daysBetween);
+	System.out.print ("Days: " + daysBetween);
 	int nbCreneaux = (int) daysBetween *2; // on double le nombre de creneaux (matin / aprem)
-	System.out.println("nbCreneaux: "+nbCreneaux);
+	System.out.println("\tnbCreneaux: "+nbCreneaux);
 	
 	ArrayList<Creneau>ligneCreneauAm = new ArrayList<Creneau>();
 	ArrayList<Creneau>ligneCreneauPm = new ArrayList<Creneau>();
