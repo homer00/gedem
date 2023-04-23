@@ -22,7 +22,7 @@ public class ControlConnection {
 	// >>>>>>>>>>>> PENSER A MODIFIER l'utilisateur (root) et password (root) en fonction de votre base de donnée.
 	
 	/**
-	 *  EL CONSTRUCTOR... 
+	 *  Constructeur sans paramètres
 	 * @param dao_db
 	 * @param dao_login
 	 * @param dao_password
@@ -32,8 +32,8 @@ public class ControlConnection {
 		try {
 			Class.forName(dao_strClassName);
 			sop("\nConnexion effectuee.");
-			System.out.println("ControlConnection : Constructeur sans parametres");
-			System.out.println("Adresse de connexion : "+ strUrl+"\n\n");
+			System.out.println("ControlConnection : Constructeur sans parametres (1)");
+			System.out.println("Adresse de connexion : "+ strUrl+"\n");
 			this.conn = DriverManager.getConnection(strUrl, loginDb, passwordDb);
 			 this.st = conn.createStatement();
 				
@@ -64,7 +64,7 @@ public class ControlConnection {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			sop("Connexion effectuee.");
-			System.out.println("ControlConnection : Constructeur 2 avec parametres");
+			System.out.println("ControlConnection : Constructeur 2 avec parametres (2)");
 			System.out.println("Adresse de connexion : "+ strUrl+" ");
 			this.conn = DriverManager.getConnection(strUrl, loginDb, passwordDb);
 			this.st = conn.createStatement();

@@ -130,7 +130,6 @@ public class ViewFormPersonne extends JPanel implements ActionListener{
 		JPanel conclu = new JPanel(); // ====================== JPANEL conclu (en bas)
 		conclu.setBackground(maCouleur);
 		ImageIcon image = new ImageIcon("./img/eleve2.png");
-		
 		imagelabel = new JLabel(image);
 		conclu.add(imagelabel);
 		

@@ -3,6 +3,7 @@ package controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
+import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Duration;
@@ -11,7 +12,6 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -23,12 +23,14 @@ public class ControlCreneau {
 
 	private String debutFormationStr;
 	private String finFormationStr;
-	
+	private int cpt;
 	private Date debutFormation;
 	private Date finFormation;
 	private Date heureDebutMat;
 	private Date heureDebutAprem;
 	boolean  doublons_cren_flag = false;
+	private ControlConnection cc;
+	
 	
 	
 	// java.time --> année bissextile ? boolean isLeap = year.isLeap();
@@ -52,31 +54,29 @@ public class ControlCreneau {
 	LocalDateTime date1 = LocalDate.parse(debutFormationStr, dtf).atStartOfDay(); // on formate date1 dd-MM-yyyy
 	
 	//LocalDateTime date1 = debutFormationStr.formatted(dtf);
-	LocalDateTime date2 = LocalDate.parse(finFormationStr, dtf).atStartOfDay();
-	System.out.print("\ndate1 (sans formatage): "+ date1);
-	System.out.print("\tdate 1 : "+ date1.getDayOfMonth()+"/"+date1.getMonthValue()+"/"+date1.getYear()+"\t");
+	LocalDateTime date2 = LocalDate.parse(finFormationStr, dtf).atStartOfDay(); // on formate date2 dd-MM-yyyy
+	System.out.print("\ndate1 (sans formatage): "+ date1); // test
+	System.out.print("\tdate 1 : "+ date1.getDayOfMonth()+"/"+date1.getMonthValue()+"/"+date1.getYear()+"\t"); // test
 	
 	long daysBetween = Duration.between(date1, date2).toDays(); // calcul intervalle de temps (en jours)
-	System.out.print ("Days: " + daysBetween);
+	System.out.print ("daysBetween : " + daysBetween); // test
 	int nbCreneaux = (int) daysBetween *2; // on double le nombre de creneaux (matin / aprem)
-	System.out.println("\tnbCreneaux: "+nbCreneaux);
+	System.out.println("\tnbCreneaux: "+nbCreneaux); // test
 	
 	ArrayList<Creneau>ligneCreneauAm = new ArrayList<Creneau>();
 	ArrayList<Creneau>ligneCreneauPm = new ArrayList<Creneau>();
-	int cpt=1;
-	for (int i=0; i<daysBetween; i++) {
+	cpt=1;
+	for (int i=0; i<daysBetween && cpt<700; i++) {
 		
 			LocalDateTime nextCren_matin = date1.plusDays(i); // on crée une valeur de date pour chaque jour de la boucle
 			LocalDateTime nextCren_aprem = date1.plusDays(i); // créneau matin puis après-midi
+			// conversions pour l'insertion dans la BDD : 
 			java.sql.Date nextCren_matinSql = java.sql.Date.valueOf(nextCren_matin.toLocalDate());
 			java.sql.Date nextCren_apremSql = java.sql.Date.valueOf(nextCren_aprem.toLocalDate());
 			//System.out.println("sql date : "+nextCren_matinSql.toString());
 			// 11/04/2023
-			DateTimeFormatter format1 = DateTimeFormatter.ofPattern("HH:mm");
-			
-	
+			//DateTimeFormatter format1 = DateTimeFormatter.ofPattern("HH:mm");
 			//java.sql.Time timeValue = new Time(Creneau.heureDebut_matin);
-			
 			// heureDebut_matin : format String, attribut de la classe creneau
 			LocalTime heureDebutMat = LocalTime.parse((Creneau.heureDebut_matin));
 			LocalTime heureFinMat = LocalTime.parse((Creneau.heureFin_matin));
@@ -84,30 +84,33 @@ public class ControlCreneau {
 			LocalTime heureFinAprem = LocalTime.parse((Creneau.heureFin_aprem));
 			
 			// vérification de la présence de créneaux dans la BDD pour empêcher les doublons. =============  DOUBLONS ?
-			
 			String req_verif_doublons="SELECT COUNT(dateCreneau) from creneau GROUP BY dateCreneau;";
 			// la requete compte le nombre de dates de créneau identiques, qui doit être au maximum de 2 par jour. (matin, aprem)
 			
-			ControlConnection cc = new ControlConnection();
+			cc = new ControlConnection();
+			
 			try {
 				ResultSet rs1 = cc.getStatement().executeQuery(req_verif_doublons);
+				// ArrayList pour ranger les comptages issus de la requête.
 				ArrayList<Integer> doublons_cren = new ArrayList<Integer>();
 				
 				
 				while (rs1.next()) {
-					//System.out.println("X\t");
+					//if (rs1.getInt(1)>2) {
 					doublons_cren.add(rs1.getInt(1));
 					System.out.println("boucle rs1 : "+String.valueOf(rs1.getInt(1))); // conv int -> String
+					//}
 				}
 				for (i = 0; i<doublons_cren.size();i++) { // on parcourt l'ArrayList des doublons
-				if (doublons_cren.get(i)>2) { // si il y a plus de 2 dates de creneau dans la liste
-					doublons_cren_flag = true; // drapeau pour tester présence de doublons
-					System.out.println("flag : detection presence de creneaux en double (>2)");
-				}
-				else { doublons_cren_flag = false; }
+					if (doublons_cren.get(i)>2) { // si il y a plus de 2 dates de creneau dans la liste
+						doublons_cren_flag = true; // drapeau pour tester présence de doublons
+						System.out.println("flag : detection presence de creneaux en double (>2)");
+						cpt=700;// condition de sortie de boucle.
+					}
+				//else { doublons_cren_flag = false; }
 				}
 	
-				}
+			} // Fin du "try" 
 			catch (SQLException e1) {
 				System.out.println("Erreur au moment de la verif de doublons");
 				e1.printStackTrace();
@@ -160,12 +163,38 @@ public class ControlCreneau {
 			cpt++;
 			System.out.println("Creneau "+cpt+" : " +nextCren_aprem.format(dtf) );
 			cpt++;
+			this.supressDouble(); // Méthode supressDouble de la classe.
 			
 	} // fin de boucle for
-	
-	
+
 	
 }
+	
+	
+	// Méthode supression 2 lignes de créneau (en cas de doublon)
+	public void supressDouble() {
+		String reqCount = "SELECT COUNT(dateCreneau) AS cdc,dateCreneau FROM creneau GROUP BY dateCreneau HAVING cdc > 2;";
+		//String delEnr = "DELETE "
+		try {
+			cc = new ControlConnection();
+			ResultSet rs1 = cc.getStatement().executeQuery(reqCount);
+			ArrayList<Date> crenListSuppr = new ArrayList<Date>();
+			while (rs1.next()) {
+				crenListSuppr.add(rs1.getDate(2));
+			}
+			for (int i=0; i<crenListSuppr.size(); i++) {
+				System.out.println("crenListSuppr : "+(i+1)+"\t"+crenListSuppr.get(i));
+				
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Erreur connexion / statement, méthode supressDouble de ControlCreneau");
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 	/*
 	 * //================================== CONSTRUCTEUR1
 	public Creneau() {

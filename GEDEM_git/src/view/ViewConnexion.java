@@ -146,6 +146,11 @@ public class ViewConnexion extends JPanel implements ActionListener {
 			*/
 
 	}
+		if (evt.getSource()==reset_btn) { // on efface les champs si bouton "Effacer"
+			this.uLogin.setText("");
+			this.uPassword.setText("");
+		}
+		
 		if(evt.getSource()==uPassword) {
 			// si on appuie sur [ENTREE] dans le champ password du formulaire --> changement de couleur
 			// ça sert à rien mais c'est tellement bien...

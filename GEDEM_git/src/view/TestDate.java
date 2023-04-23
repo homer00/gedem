@@ -1,6 +1,7 @@
 package view;
 
 import model.Stagiaire;
+import view.Dialogue;
 import java.text.ParseException;
 
 import controller.ControlCreneau;
@@ -15,7 +16,8 @@ public class TestDate {
 try {
 	Stagiaire st1 = new Stagiaire(2,2);
 	st1.afficheStagiaires();
-	ControlCreneau cren = new ControlCreneau("29-08-2022","30-08-2022");
+	ControlCreneau cren = new ControlCreneau("29-08-2022","30-09-2022");
+	Dialogue dial = new Dialogue();
 } 
 catch (ParseException e) {
 	System.out.println("Erreur dans la creation de l instance cd ControlCreneau");

@@ -22,8 +22,22 @@ public class Stagiaire extends Personne{
 	private int idStagiaire;
 	private int idPersonne;
 	ControlConnection cc;
-
-	
+/**
+ * Constructeur 1 paramètre : idPersonne (attribut commun à la classe Personne) 
+ * @param idPersonne
+ */
+	public Stagiaire(int idPersonne) {
+		super(); // appel du constructeur vide parent
+		this.idPersonne = idPersonne;
+		// test d'appel d'une méthode de la Classe mère (Personne) :
+		show1Personn();
+		
+	}
+/**
+ * Constructeur 2 paramètres (les 2 champs de la table stagiaire)
+ * @param idStagiaire
+ * @param idPersonne
+ */
 	public Stagiaire(int idStagiaire, int idPersonne) {
 		super(); // appel du constructeur vide parent
 		this.idStagiaire = idStagiaire;
