@@ -7,16 +7,22 @@ import java.sql.Statement;
 
 public class ControlConnection {
 
-
 	private String dbName="gedem" ;
-	private String sql_host = "localhost";
+	//private String sql_host = "localhost";
 	//private String sql_host = "192.168.1.121";
+	private String sql_host = "lycee.yves-thepot.pro.dns-orange.fr";
 	private String dao_strClassName = "com.mysql.cj.jdbc.Driver";
-	private String loginDb = "root";
-	private String passwordDb = "root";
-	private String strUrl = "jdbc:mysql://"+sql_host+":3306/" +  dbName+"?useSSL=false&serverTimezone=UTC";
+	//private int sqlPort = 3306;
+	private int sqlPort = 20372;
+	//private String loginDb = "root";
+	private String loginDb = "sqlgedem2";
+	//private String passwordDb = "root";
+	private String passwordDb = "sqlgedem2";
+	private String strUrl = "jdbc:mysql://"+sql_host+":"+sqlPort+"/" +  dbName+"?useSSL=false&serverTimezone=UTC";
 	private Connection conn;
 	private Statement st;
+	
+
 
 	// >>>>>>>>>>>> PENSER A MODIFIER l'utilisateur (root) et password (root) en fonction de votre base de donnée.
 
