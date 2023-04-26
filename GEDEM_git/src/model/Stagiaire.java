@@ -2,13 +2,6 @@ package model;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Vector;
-
-
-import com.mysql.cj.xdevapi.Statement;
 
 import tools.ControlConnection;
 
@@ -18,12 +11,12 @@ import tools.ControlConnection;
  * @author hs
  *
  */
-public class Stagiaire extends Personne{  
+public class Stagiaire extends Personne{
 	private int idStagiaire;
 	private int idPersonne;
 	ControlConnection cc;
 /**
- * Constructeur 1 paramètre : idPersonne (attribut commun à la classe Personne) 
+ * Constructeur 1 paramètre : idPersonne (attribut commun à la classe Personne)
  * @param idPersonne
  */
 	public Stagiaire(int idPersonne) {
@@ -31,7 +24,7 @@ public class Stagiaire extends Personne{
 		this.idPersonne = idPersonne;
 		// test d'appel d'une méthode de la Classe mère (Personne) :
 		show1Personn();
-		
+
 	}
 /**
  * Constructeur 2 paramètres (les 2 champs de la table stagiaire)
@@ -44,15 +37,15 @@ public class Stagiaire extends Personne{
 		this.idPersonne = idPersonne;
 		// test d'appel d'une méthode de la Classe mère (Personne) :
 		show1Personn();
-		
+
 	}
-	
+
 	public void afficheStagiaires() {
-		
+
 		// requete SQL pour sélectionner l'ensemble des stagiaires
 		String reqAS = "SELECT p.nom,p.prenom,s.idStagiaire FROM Personne p JOIN h_personne_stagiaire s USING (idPersonne) WHERE idRole='3'";
 		// Dans la table role, idRole=3 correspond à "User", qui est le rôle correspondant aux stagiaires.
-		
+
 		try {
 			cc = new ControlConnection();
 			ResultSet rs = cc.getStatement().executeQuery(reqAS);
@@ -63,24 +56,24 @@ public class Stagiaire extends Personne{
 		catch (SQLException e){
 			System.out.println("Erreur SQL - Classe Stagiaire");
 			e.printStackTrace();
-			 
-		}
 
-		
+		}
 	}
 
 	//=========================================  ACCESSEURS
 	public int getIdStagiaire() {
 		return this.idStagiaire;
 	}
+	@Override
 	public int getIdPersonne() {
 		return this.idPersonne;
 	}
 	public void setIdStagiaire(int ids) {
 		this.idStagiaire = ids;
 	}
+	@Override
 	public void setIdPersonne(int idp) {
 		this.idPersonne = idp;
 	}
-	
+
 }

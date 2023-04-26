@@ -6,10 +6,18 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.*;
-import java.util.Vector;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.*;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -23,7 +31,7 @@ import model.role;
 public class ViewFormPersonne extends JPanel implements ActionListener{
 	JLabel v1,v2;
 	JLabel ml2c1, ml2c3,ml3c1,ml3c3;
-	
+
 	private JLabel label_intro;
 	private JLabel label_fa,label_fb,label_fc,label_fd;
 	private JLabel label_vide1, label_vide2,label_vide4,label_vide5,label_vide6;
@@ -40,11 +48,11 @@ public class ViewFormPersonne extends JPanel implements ActionListener{
 	private boolean flag_jc_role = false;
 	public Font messageFont = new Font("Georgia,Helvetica,Serif",Font.PLAIN,18);
 	protected ImageIcon image;
-	protected int evt_cpt=0;	// compteur pour les clics sur bouton "valider" 
-	
+	protected int evt_cpt=0;	// compteur pour les clics sur bouton "valider"
+
 	public ViewFormPersonne(App appliform) {
 		this.appliform = appliform;
-		
+
 
 		Dimension maNewDim = new Dimension(700,600);
 		appliform.setSize(maNewDim);
@@ -52,15 +60,15 @@ public class ViewFormPersonne extends JPanel implements ActionListener{
 		Color maCouleur = new Color(180,180,180);
 		setBackground(maCouleur);
 		setBorder(new LineBorder(Color.cyan));
-		setLayout(new BorderLayout()); // ensemble principal 
-		
+		setLayout(new BorderLayout()); // ensemble principal
+
 		JPanel intro = new JPanel(new FlowLayout()); // ====================== JPANEL intro
 		intro.setBackground(maCouleur);
 		label_intro = new JLabel("Nouveau profil utilisateur - GEDEM_git");
-		label_intro.setHorizontalTextPosition(JLabel.CENTER);
+		label_intro.setHorizontalTextPosition(SwingConstants.CENTER);
 		//label_intro.setPreferredSize(getMaximumSize());
 		intro.add(label_intro);
-		
+
 		ml2c1 = new JLabel("Tabulation++");ml2c3 = new JLabel("Tabulation++");
 		ml2c3.setFont(new Font("Serif",Font.PLAIN,14));
 
@@ -68,7 +76,7 @@ public class ViewFormPersonne extends JPanel implements ActionListener{
 		ml2c3.setForeground(getBackground());
 		//ml2c1.setBorder(new LineBorder(Color.red));
 		//ml2c3.setBorder(new LineBorder(Color.red));
-		
+
 		JPanel jpmain = new JPanel(new GridLayout(6,4,20,10)); // ============= JPANEL jpmain
 		// line, col, hgap, vgap // second ensemble
 
@@ -77,11 +85,11 @@ public class ViewFormPersonne extends JPanel implements ActionListener{
 		label_fb = new JLabel("");
 		label_fc = new JLabel("");
 		label_fd = new JLabel("");
-		
+
 		label_vide1 = new JLabel();label_vide2 = new JLabel();
 		label_vide4 = new JLabel();label_vide5 = new JLabel();	label_vide6 = new JLabel();
-	
-		
+
+
 		label_nom = new JLabel("Nom : ");
 		label_prenom = new JLabel("Prénom : ");
 		label_role = new JLabel("Rôle : ");
@@ -89,7 +97,7 @@ public class ViewFormPersonne extends JPanel implements ActionListener{
 		label_login = new JLabel("Login : ");
 		label_pass = new JLabel("Mot de passe : ");
 		label_mail = new JLabel("Mail : ");
-		
+
 		jt_nom = new JTextField(25);
 		jt_nom.addActionListener(this);
 		jt_prenom = new JTextField(25);
@@ -98,27 +106,27 @@ public class ViewFormPersonne extends JPanel implements ActionListener{
 		jt_mail.addActionListener(this);
 		jt_tel = new JTextField(13);
 		jt_tel.addActionListener(this);
-		
+
 		//================================== JCOMBOBOX liste de roles
 		listeRole = new role(); // instanciation de la classe role
 		// et accès à la méthode listerRole()
-		
-		jc_role = new JComboBox<String>(listeRole.listerRole());
+
+		jc_role = new JComboBox<>(listeRole.listerRole());
 		// On récupère la liste des Roles à partir de la table role
 		// en parammètre de JComboBox : le Vector qui contient la liste des roles
-		
+
 		jc_role.addActionListener(this);
-		
-		
+
+
 		jt_login = new JTextField(16);
 		jt_login.addActionListener(this);
 		jt_pass = new JPasswordField(16);
 		jt_pass.addActionListener(this);
-		
+
 		btn_f1 = new JButton("Enregistrer");
 		btn_f1.addActionListener(this);
 		flag_btnf1 = false; // valeur par défaut du flag (sert à l'actionListener)
-		
+
 		jpmain.add(label_fa);	jpmain.add(label_fb);	jpmain.add(label_fc);	jpmain.add(label_fd);
 		jpmain.add(label_nom);	jpmain.add(jt_nom);	jpmain.add(label_role);jpmain.add(jc_role);
 		jpmain.add(label_prenom);jpmain.add(jt_prenom);jpmain.add(label_login);jpmain.add(jt_login);
@@ -132,7 +140,7 @@ public class ViewFormPersonne extends JPanel implements ActionListener{
 		ImageIcon image = new ImageIcon("./img/eleve2.png");
 		imagelabel = new JLabel(image);
 		conclu.add(imagelabel);
-		
+
 		jmessageLabel = new JLabel("");
 		jmessageLabel.setFont(this.messageFont);
 		jmessageLabel.setForeground(Color.RED);
@@ -142,14 +150,15 @@ public class ViewFormPersonne extends JPanel implements ActionListener{
 		Border labelBorder = new LineBorder(Color.WHITE, 2,true); // couleur, épaisseur, round?(boolean)
 		jmessageLabel.setBorder(new CompoundBorder(labelBorder, marginBorder)); // bordure composée - couleur, épaisseur, round?(boolean)
 		conclu.add(jmessageLabel);
-		
+
 		add(intro, BorderLayout.NORTH);
 		add(ml2c1, BorderLayout.WEST);add(jpmain, BorderLayout.CENTER);add(ml2c3, BorderLayout.EAST);
 		add(conclu, BorderLayout.SOUTH);
-	
-		
+
+
 	}
 
+	@Override
 	public void actionPerformed(ActionEvent evt) {
 
 		if(evt.getSource()==btn_f1) { // si clic sur le bouton "Enregistrer"
@@ -163,21 +172,21 @@ public class ViewFormPersonne extends JPanel implements ActionListener{
 			}
 			//cfp.ajouterPersonne();
 		}
-		
+
 		if (evt.getSource()==jc_role) { // si sélection de la JComboBox
 			setFlag_jc_role(true); // permet d'indiquer que la JComboBox a été actionnée
 			String itemSel = jc_role.getSelectedItem().toString();
 			jc_role.setSelectedItem(jc_role);
 			System.out.println("jc_role.getSelectedItem() "+itemSel);
-		
+
 			//cfp.ajouterPersonne();
 
 
 	}
 
 	}
-		
-	
+
+
 	public JTextField getJt_nom() {
 		return jt_nom;
 	}
@@ -222,18 +231,18 @@ public class ViewFormPersonne extends JPanel implements ActionListener{
 	}
 	public boolean isFlag_btnf1() {
 		return flag_btnf1;
-		
+
 	}
 	public void setJmessageLabel(String jmes) {
 		this.jmessageLabel.setFont(messageFont);
 		this.jmessageLabel.setText(jmes);
-		
+
 	}
 
 	public void setImage(ImageIcon image) {
 		this.image = image;
 		this.imagelabel.setBackground(Color.yellow);
-		
+
 	}
 	public void setJmessageLabelColor(String couleur) {
 		Color laCouleur;
@@ -242,7 +251,7 @@ public class ViewFormPersonne extends JPanel implements ActionListener{
 		}
 		else if (couleur.toUpperCase().equals("WHITE")) { laCouleur = Color.white; }
 		else { laCouleur = Color.red; }
-		
+
 		this.jmessageLabel.setForeground(laCouleur );
 	}
 

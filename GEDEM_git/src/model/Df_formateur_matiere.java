@@ -6,7 +6,7 @@ public class Df_formateur_matiere {
 	private int idFormateur;
 	private int idMatiere;
 
-	
+
 	public Df_formateur_matiere(int idfm, int idf, int idm){
 		this.idFormateur_Matiere = idfm;
 		this.idFormateur = idf;
@@ -36,6 +36,6 @@ public class Df_formateur_matiere {
 	public void setIdMatiere(int idMatiere) {
 		this.idMatiere = idMatiere;
 	}
-	
-	
+
+
 }

@@ -12,28 +12,28 @@ public class Personne {
 	private String tel;
 	private String login;
 	private String password;
-	
+
 
 public Personne(){
 	// constructeur vide pour les héritages Stagiaire, Administratif, Formateur
 }
-	
+
 	public Personne(String n, String p, String m, String t) {
-		
+
 		this.nom = n;
 		this.prenom = p;
 		this.mail = m;
 		this.tel = t;
-		
+
 	}
 public Personne(String n, String p, String m, String t, String login, String password) {
-		
+
 		this.nom = n;
 		this.prenom = p;
 		this.mail = m;
 		this.tel = t;
-		
-		
+
+
 	}
 public Personne(int idRole,String n, String p, String m, String t) {
 	this.idRole=idRole;
@@ -41,16 +41,16 @@ public Personne(int idRole,String n, String p, String m, String t) {
 	this.prenom = p;
 	this.mail = m;
 	this.tel = t;
-	
+
 }
-	
+
 public Personne(int idRole, String n, String p, String m, String t, String login, String password) {
-	// reprend tous les champs de la table, sauf le premier (idPersonne, auto-incrémenté)	
+	// reprend tous les champs de la table, sauf le premier (idPersonne, auto-incrémenté)
 		this.nom = n;
 		this.prenom = p;
 		this.mail = m;
 		this.tel = t;
-		
+
 	}
 
 public void show1Personn() {
@@ -59,13 +59,13 @@ public void show1Personn() {
 	pTest.idRole = 3;
 	pTest.nom = "Richard";
 	pTest.prenom = "Pierre";
-	Vector<String> vec = new Vector<String>();
+	Vector<String> vec = new Vector<>();
 	vec.add(String.valueOf(pTest.idRole));vec.add(pTest.nom);vec.add(pTest.prenom);
 	System.out.print("Méthode test --> La personne : ");
 	for (int i=0; i<vec.size(); i++) {
 		System.out.print(vec.elementAt(i)+" ");
 	}
-	
+
 }
 
 //========================================= ACCESSEURS
@@ -109,6 +109,6 @@ public void show1Personn() {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	
-	
+
+
 }

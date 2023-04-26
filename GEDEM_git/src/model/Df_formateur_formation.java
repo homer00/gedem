@@ -5,7 +5,7 @@ public class Df_formateur_formation {
 	private int idFormateur_Formation;
 	private int idFormateur;
 	private int idFormation;
-	
+
 	public Df_formateur_formation(int idff, int idf1, int idf2) {
 		this.idFormateur_Formation = idff;
 		this.idFormateur = idf1;

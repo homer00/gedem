@@ -1,17 +1,16 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 public class Formation {
-	private int idFormation;       
-	private String intituleFormation; 
-	private Date debutFormation;    
-	private Date finFormation;      
+	private int idFormation;
+	private String intituleFormation;
+	private Date debutFormation;
+	private Date finFormation;
 	//private String  commentFormation ;
 	//private ArrayList<Formation> listFormation;
-	
-	
+
+
 	public Formation(int idf, String ifor, Date df, Date ff) {
 		this.idFormation = idf;
 		this.intituleFormation = ifor;
@@ -19,7 +18,7 @@ public class Formation {
 		this.finFormation = ff;
 		//this.commentFormation = cf;
 		//this.listFormation = new ArrayList<Formation>();
-		
+
 	}
 
 	public int getIdFormation() {
@@ -63,6 +62,6 @@ public class Formation {
 		this.listFormation = listFormation;
 	}
 */
-	
+
 
 }

@@ -1,26 +1,25 @@
 package tools;
 
-import java.sql.*;
-import java.util.ArrayList;
-//import java.util.ListIterator;
-import java.util.Scanner;
-import model.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ControlConnection {
 
 
 	private String dbName="gedem" ;
-	//private String sql_host = "localhost";
-	private String sql_host = "192.168.1.121";
+	private String sql_host = "localhost";
+	//private String sql_host = "192.168.1.121";
 	private String dao_strClassName = "com.mysql.cj.jdbc.Driver";
 	private String loginDb = "root";
 	private String passwordDb = "root";
 	private String strUrl = "jdbc:mysql://"+sql_host+":3306/" +  dbName+"?useSSL=false&serverTimezone=UTC";
 	private Connection conn;
 	private Statement st;
-	
+
 	// >>>>>>>>>>>> PENSER A MODIFIER l'utilisateur (root) et password (root) en fonction de votre base de donnée.
-	
+
 	/**
 	 *  Constructeur sans paramètres
 	 * @param dao_db
@@ -28,7 +27,7 @@ public class ControlConnection {
 	 * @param dao_password
 	 */
 	public ControlConnection() {
-				
+
 		try {
 			Class.forName(dao_strClassName);
 			sop("\nConnexion effectuee.");
@@ -36,7 +35,7 @@ public class ControlConnection {
 			System.out.println("Adresse de connexion : "+ strUrl+"\n");
 			this.conn = DriverManager.getConnection(strUrl, loginDb, passwordDb);
 			 this.st = conn.createStatement();
-				
+
 		}
 		catch (SQLException e) {
 			System.out.println("ControlConnection : erreur au premier \"try\".  Probleme de Connection ou Statement.");
@@ -48,7 +47,7 @@ public class ControlConnection {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 *  CONSTRUCTEUR SURCHARGE
 	 *  Ce constructeur prend 3 paramètres : le nom de la base, le login et le password.
@@ -60,7 +59,7 @@ public class ControlConnection {
 		this.dbName = dao_db;
 		this.loginDb = dao_login;
 		this.passwordDb = dao_password;
-		
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			sop("Connexion effectuee.");
@@ -78,13 +77,13 @@ public class ControlConnection {
 			System.out.println("ControlConnection : classe introuvable : erreur de driver.");
 			e.printStackTrace();
 		}
-	
+
 		} // FIN CONSTRUCTEUR
 
-	
+
 	// ---------------------------------------getters , Setters -------------------
-	
-	
+
+
 	public String getDao_strClassName() {
 		return dao_strClassName;
 	}
@@ -113,7 +112,7 @@ public class ControlConnection {
 	public void sop(String texte) {
 		System.out.println(texte);
 	}
-	// =========================================== fermerConn()	
+	// =========================================== fermerConn()
 	/**
 	 *  Fonction fermerConn()
 	 *  Fermeture de la connexion mysql:jdbc

@@ -1,14 +1,10 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -32,15 +28,15 @@ public class ViewConnexion extends JPanel implements ActionListener {
 	private App appli;
 	JPanel panel2;
 
-	public ViewConnexion(App app_conn) {		
+	public ViewConnexion(App app_conn) {
 	// En paramètre du constructeur de la vue : la vue de l'Application principale (JFrame)
 
 		this.appli = app_conn;
-		
+
 		this.setLayout(null);
-		
+
 		// ==========================================
-		
+
 		setBackground(new Color(200,200,180));
 		//setPreferredSize(new Dimension(100,200));
 		//setLayout(new FlowLayout(FlowLayout.LEFT, 20, 30));
@@ -51,37 +47,37 @@ public class ViewConnexion extends JPanel implements ActionListener {
 
 		label = new JLabel("Utilisateur : ");
 		label.setBounds(180, 150, 140, 40);
-		
+
 		label2 = new JLabel("Mot de passe : ");
 		label2.setBounds(180, 200, 140, 40);
-		
+
 		message = new JLabel("");
 		message.setFont(new Font("verdana,serif", Font.PLAIN,24));
 		message.setBounds(300, 350, 300, 40);
-		
+
 		message1 = new JLabel("");
 		message2 = new JLabel("CONNEXION REFUSEE");
 		//border = new LineBorder(new Color (200,120,120));
-		
+
 		uLogin = new JTextField(20);
 		uLogin.setBounds(300, 150, 300, 40);
 		uLogin.addActionListener(this);
-		
+
 		uPassword = new JPasswordField(20);
 		uPassword.setBounds(300, 200, 300, 40);
 		uPassword.addActionListener(this);
 		montreMdp = new JCheckBox("Montrer le mot de passe");
 		montreMdp.setBounds(300, 250, 300, 40);
 		montreMdp.addActionListener(this);
-		
+
 		bouton_val = new JButton("Valider");
 		bouton_val.setBounds(300, 300, 100, 40);
 		bouton_val.addActionListener(this);
-		
+
 		reset_btn = new JButton("Effacer");
 		reset_btn.setBounds(500, 300, 100, 40);
 		reset_btn.addActionListener(this);
-		
+
 		jtlogin = new JTextArea();
 
 		add(labelTitre);
@@ -150,7 +146,7 @@ public class ViewConnexion extends JPanel implements ActionListener {
 			this.uLogin.setText("");
 			this.uPassword.setText("");
 		}
-		
+
 		if(evt.getSource()==uPassword) {
 			// si on appuie sur [ENTREE] dans le champ password du formulaire --> changement de couleur
 			// ça sert à rien mais c'est tellement bien...

@@ -1,14 +1,7 @@
 package model;
 
-import java.time.*;
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Duration;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-
-import tools.ControlConnection;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class Creneau {
 
@@ -31,7 +24,7 @@ public Creneau(Date dateCreneau, String heureDebut, String heureFin, Date duree)
 	this.heureDebut = heureDebut;
 	this.heureFin = heureFin;
 	this.duree = duree;
-	this.listeCreneau = new ArrayList<Creneau>();
+	this.listeCreneau = new ArrayList<>();
 }
 
 public int getIdCreneau() {

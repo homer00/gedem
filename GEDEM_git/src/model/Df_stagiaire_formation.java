@@ -5,7 +5,7 @@ public class Df_stagiaire_formation {
 	private int idStagiaire_Formation;
 	private int idStagiaire;
 	private int idFormation;
-	
+
 	public Df_stagiaire_formation(int idsf, int ids, int idf) {
 		this.idStagiaire_Formation = idsf;
 		this.idStagiaire = ids;
@@ -35,5 +35,5 @@ public class Df_stagiaire_formation {
 	public void setIdFormation(int idFormation) {
 		this.idFormation = idFormation;
 	}
-	
+
 }
