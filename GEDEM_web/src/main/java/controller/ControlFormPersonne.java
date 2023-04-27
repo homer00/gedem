@@ -8,14 +8,14 @@ import java.util.Vector;
 import javax.swing.ImageIcon;
 
 import model.Personne;
-import tools.ControlConnection;
-import view.App;
-import view.ViewFormPersonne;
+import tools.Connexion;
+								//import view.App;
+								//import view.ViewFormPersonne;
 
 public class ControlFormPersonne {
 
 	private Vector<String> vectorRole; // tableau qui liste les roles
-	private ControlConnection cc;
+	private Connexion cc;
 	//private ViewFormPersonne vfp;
 	private Personne pers;
 	private ArrayList<Personne> al_personne;
@@ -25,8 +25,8 @@ public class ControlFormPersonne {
 	private String val2,val3,val4,val5="0",val6;
 	private char[] val7;
 	private String val7_str, val5new;
-	private App appli;
-	private ViewFormPersonne vfp;
+							//private App appli;
+							//private ViewFormPersonne vfp;
 	boolean flag_validation = true; // drapeau pour confirmer que le formulaire est ok avant insertion BDD
 	boolean flag_al_personne = false;
 	/**
@@ -35,19 +35,17 @@ public class ControlFormPersonne {
 	 * @param vfp
 	 * @param appli
 	 */
-	public ControlFormPersonne(ViewFormPersonne vfp, App appli) {
-		this.vfp = vfp;
-		this.appli=appli;
-		cc = new ControlConnection();
+			//public ControlFormPersonne(ViewFormPersonne vfp, App appli) {
+	public ControlFormPersonne() {
+					//this.vfp = vfp;
+					//this.appli=appli;
+		cc = new Connexion();
 
 		if (!flag_al_personne) {		// On créer une liste seulement si elle n'existe pas déjà.
-
 		al_personne = new ArrayList<>();
 		flag_al_personne = true;
 		}
-
 		ajouterPersonne();
-
 	}
 
 

@@ -5,14 +5,14 @@ import java.sql.SQLException;
 
 import javax.swing.JTextField;
 
-import controller.ControlConnection;
+import tools.Connexion;
 
 
 
 
 public class ControlLogin {
 
-	private ControlConnection cc; // type DAO Acces
+	private Connexion cc; // type DAO Acces
 	//private ViewFormPersonne vfp;
 	//private ViewListeFormation vform;
 
@@ -26,7 +26,7 @@ public class ControlLogin {
 	 */
 	//public ControlLogin(ViewConnexion cn,App appli) {
 	public ControlLogin() {
-		 cc = new ControlConnection();
+		 cc = new Connexion();
 		// ViewConnexion et App en paramètres, pour pouvoir échanger
 		// des infos entre les vues et le controleur - 	cn : JPanel		appli : JFrame
 		//this.app = appli;

@@ -24,7 +24,6 @@ public class ViewConnexion extends JPanel implements ActionListener {
 	private JTextField uLogin;
 	private JPasswordField uPassword;
 	private JButton bouton_val, reset_btn;
-	JTextArea jtlogin;
 	private App appli;
 	JPanel panel2;
 
@@ -77,8 +76,6 @@ public class ViewConnexion extends JPanel implements ActionListener {
 		reset_btn = new JButton("Effacer");
 		reset_btn.setBounds(500, 300, 100, 40);
 		reset_btn.addActionListener(this);
-
-		jtlogin = new JTextArea();
 
 		add(labelTitre);
 		add(label);

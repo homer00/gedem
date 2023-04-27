@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class ControlConnection {
+public class Connexion {
 
 	private String dbName="gedem" ;
 	//private String sql_host = "localhost";
@@ -30,7 +30,7 @@ public class ControlConnection {
 	 * @param dao_login
 	 * @param dao_password
 	 */
-	public ControlConnection() {
+	public Connexion() {
 
 		try {
 			Class.forName(dao_strClassName);
@@ -59,7 +59,7 @@ public class ControlConnection {
 	 * @param dao_login
 	 * @param dao_password
 	 */
-	public ControlConnection(String dao_db, String dao_login, String dao_password) {
+	public Connexion(String dao_db, String dao_login, String dao_password) {
 		this.dbName = dao_db;
 		this.loginDb = dao_login;
 		this.passwordDb = dao_password;

@@ -9,10 +9,10 @@ import java.util.Vector;
 //import com.mysql.cj.jdbc.result.ResultSetMetaData;
 
 import model.Formation;
-import tools.ControlConnection;
-import view.App;
+import tools.Connexion;
+								//import view.App;
 //import view.ViewFormateur;
-import view.ViewListeFormation;
+							//import view.ViewListeFormation;
 
 
 public class ControlFormateur {
@@ -34,7 +34,7 @@ public class ControlFormateur {
 	// Méthode pour afficher la Table des formations dans la console
 
 	public void showTableFormation() {
-		ControlConnection cc = new ControlConnection();
+		Connexion cc = new Connexion();
 
 		requete = "SELECT * FROM formation";
 		try {
@@ -63,7 +63,7 @@ public class ControlFormateur {
 	// méthode pour afficher la liste des Formations, dans le JPanel ==============================
 
 		public Vector<Vector> showTableFormationJT() {
-			ControlConnection cc = new ControlConnection();
+			Connexion cc = new Connexion();
 			requete = "SELECT * from formation";
 			try {
 				ResultSet rs = cc.getStatement().executeQuery(requete);

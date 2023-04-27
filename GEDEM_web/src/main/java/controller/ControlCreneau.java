@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import model.Creneau;
-import controller.ControlConnection;
+import tools.Connexion;
 
 public class ControlCreneau {
 
@@ -26,7 +26,7 @@ public class ControlCreneau {
 	private Date heureDebutMat;
 	private Date heureDebutAprem;
 	boolean  doublons_cren_flag = false;
-	private ControlConnection cc;
+	private Connexion cc;
 
 
 
@@ -84,7 +84,7 @@ public class ControlCreneau {
 			String req_verif_doublons="SELECT COUNT(dateCreneau) from creneau GROUP BY dateCreneau;";
 			// la requete compte le nombre de dates de créneau identiques, qui doit être au maximum de 2 par jour. (matin, aprem)
 
-			cc = new ControlConnection();
+			cc = new Connexion();
 
 			try {
 				ResultSet rs1 = cc.getStatement().executeQuery(req_verif_doublons);
@@ -173,7 +173,7 @@ public class ControlCreneau {
 		String reqCount = "SELECT COUNT(dateCreneau) AS cdc,dateCreneau FROM creneau GROUP BY dateCreneau HAVING cdc > 2;";
 		//String delEnr = "DELETE "
 		try {
-			cc = new ControlConnection();
+			cc = new Connexion();
 			ResultSet rs1 = cc.getStatement().executeQuery(reqCount);
 			ArrayList<Date> crenListSuppr = new ArrayList<>();
 			while (rs1.next()) {
