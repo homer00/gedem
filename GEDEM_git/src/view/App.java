@@ -21,7 +21,6 @@ public class App extends JFrame{
 		//setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.setResizable(true);
-
 		this.setVisible(true);
 	}
 
@@ -49,7 +48,6 @@ public class App extends JFrame{
 		this.app = app;
 	}
 
-
 	public void setDim(Dimension dim) {
 		this.dim = dim;
 	}
@@ -71,6 +69,5 @@ public class App extends JFrame{
         int x = (screenSize.width - windowsSize.width) / 2;
         int y = (screenSize.height- windowsSize.height)/ 2;
         this.setLocation(x, y);
-
     }
 }

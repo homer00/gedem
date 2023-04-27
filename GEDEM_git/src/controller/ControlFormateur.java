@@ -24,23 +24,17 @@ public class ControlFormateur {
 	private Vector<Vector> leVector2;
 	private String leVectorStr;
 	public ArrayList<String> monArrayList;
-
-
-
 	public ControlFormateur(App appli,ViewListeFormation vf) {
-
 
 		listFormation = new ArrayList<>();
 		enteteFormation = new ArrayList<>();
 		leVector = new Vector<>();
 		leVector2 = new Vector<>();
-
-
 	}
 	// Méthode pour afficher la Table des formations dans la console
 
 	public void showTableFormation() {
-		ControlConnection cc = new ControlConnection("gedem","root","root");
+		ControlConnection cc = new ControlConnection();
 
 		requete = "SELECT * FROM formation";
 		try {
@@ -69,7 +63,7 @@ public class ControlFormateur {
 	// méthode pour afficher la liste des Formations, dans le JPanel ==============================
 
 		public Vector<Vector> showTableFormationJT() {
-			ControlConnection cc = new ControlConnection("gedem","root","root");
+			ControlConnection cc = new ControlConnection();
 			requete = "SELECT * from formation";
 			try {
 				ResultSet rs = cc.getStatement().executeQuery(requete);
@@ -79,7 +73,6 @@ public class ControlFormateur {
 					enteteFormation.add(rsmd.getColumnName(cpt));
 					//enteteFormation : ArrayList qui récupère le nom des colonnes de la table
 					cpt++;
-
 				}
 				System.out.println("Entete  "+ enteteFormation);
 				while (rs.next()) {
@@ -90,10 +83,7 @@ public class ControlFormateur {
 					monArrayList.add(rs.getString(4));
 					//monArrayList.add(rs.getString(5));
 					this.leVector2.addElement(new Vector<>(monArrayList));
-
 				}
-
-
 			}
 			catch (SQLException e) {
 				// TODO Auto-generated catch block
@@ -103,7 +93,6 @@ public class ControlFormateur {
 			cc.fermerConn();
 
 			return leVector2;
-
 	}
 		public Vector<String> getLeVector() {
 			return leVector;
