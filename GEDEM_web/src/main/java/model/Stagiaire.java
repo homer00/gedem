@@ -3,7 +3,7 @@ package model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import controller.ControlConnection;
+import tools.Connexion;
 
 /**
  *  Sous-classe de "Personne"
@@ -14,7 +14,7 @@ import controller.ControlConnection;
 public class Stagiaire extends Personne{
 	private int idStagiaire;
 	private int idPersonne;
-	ControlConnection cc;
+	Connexion cc;
 /**
  * Constructeur 1 paramètre : idPersonne (attribut commun à la classe Personne)
  * @param idPersonne
@@ -47,7 +47,7 @@ public class Stagiaire extends Personne{
 		// Dans la table role, idRole=3 correspond à "User", qui est le rôle correspondant aux stagiaires.
 
 		try {
-			cc = new ControlConnection();
+			cc = new Connexion();
 			ResultSet rs = cc.getStatement().executeQuery(reqAS);
 			while (rs.next()) {
 				System.out.println("Nom : "+rs.getString(1)+"\tPrenom : "+rs.getString(2)+"\tid Stagiaire : "+rs.getInt(3));

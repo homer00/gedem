@@ -3,13 +3,13 @@ package model;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
-import controller.ControlConnection;
+import tools.Connexion;
 
 
 public class role {
 	protected int idRole;
 	protected String nomRole;
-	protected ControlConnection ccr;
+	protected Connexion ccr;
 	protected static Vector<String> vectorRole;
 
 	public role(int id, String n) {
@@ -24,7 +24,7 @@ public class role {
 		if (role.vectorRole.isEmpty()) {
 			// on instancie une connexion bdd si la liste de roles n'existe pas encore.
 			flag_role = true;
-			ccr = new ControlConnection();
+			ccr = new Connexion();
 		}
 		String msg = (flag_role)? "Nouvelle connexion BDD (Vector vide)" : "Vector role deja rempli";
 		System.out.println("flag_role : "+flag_role+ "\t"+msg);
@@ -91,10 +91,10 @@ public class role {
 	public void setNomRole(String nomRole) {
 		this.nomRole = nomRole;
 	}
-	public ControlConnection getCcr() {
+	public Connexion getCcr() {
 		return ccr;
 	}
-	public void setCcr(ControlConnection ccr) {
+	public void setCcr(Connexion ccr) {
 		this.ccr = ccr;
 	}
 	public Vector<String> getVectorRole() {

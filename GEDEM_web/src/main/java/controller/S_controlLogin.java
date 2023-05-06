@@ -6,10 +6,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JTextField;
 import tools.Connexion;
+import view.VueConnexion;
 
 /**
  * Servlet implementation class S_controlLogin
@@ -18,24 +21,25 @@ import tools.Connexion;
 public class S_controlLogin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private Connexion cc; // type DAO Acces
+	private String str_login_session;
+	
 	//private ViewFormPersonne vfp;
 	//private ViewListeFormation vform;
 	private int flag;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public S_controlLogin() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		
+		String str_login = request.getParameter("uLogin");
+		String str_pass = request.getParameter("uPassword");
+		HttpSession session = request.getSession();
+		
+		session.setAttribute(str_login_session, str_login);
+		session.setAttribute(str_pass_session, str_pass);
+		
 		response.setCharacterEncoding("utf8");
 		response.setContentType("text/html");
 		//getServletContext().getRequestDispatcher("/VueStagiaire").forward(request,response);
@@ -48,16 +52,15 @@ public class S_controlLogin extends HttpServlet {
 			 * @param app2
 			 */
 			//public ControlLogin(ViewConnexion cn,App appli) {
-			public S_controlLogin() {
+			public S_controlLogin(VueConnexion vc) {
 				 cc = new Connexion();
-				// ViewConnexion et App en paramètres, pour pouvoir échanger
-				// des infos entre les vues et le controleur - 	cn : JPanel		appli : JFrame
-				//this.app = appli;
-
-				String loginStr = cn.getULogin().getText();
-				// recupère le login avec le getter de la classe ViewConnexion
+				// VueConnexion et App en paramètres, pour pouvoir échanger
+				// des infos entre les vues et le controleur - 
+				 
+				String loginStr = vc.getULogin().getText();
+				// recupère le login avec le getter de la classe VueConnexion
 				// on transforme l'objet TextField en String (getText), pour le passer en paramètre de la requête SQL
-				JTextField password = cn.getUPassword();
+				JTextField password = cc.getUPassword();
 				String passwordStr = password.getText();
 				// idem pour le mot de passe
 
@@ -67,7 +70,7 @@ public class S_controlLogin extends HttpServlet {
 
 				String req2="SELECT idRole,login,password from personne where login='"+loginStr+"' AND password='"+passwordStr+"' ; ";
 				//la requete récupère les infos dans la BDD en sélectionnant les champs qui correspondent aux
-				//logins, pasword et role de la vue "ViewConnexion"
+				//logins, pasword et role de la vue "VueConnexion"
 				// table : personne
 
 				ResultSet rs2 = cc.getStatement().executeQuery(req2);
@@ -82,7 +85,6 @@ public class S_controlLogin extends HttpServlet {
 
 
 					if (rs3.next()) { // si le resultSet retourne nomRole
-
 
 						System.out.println(rs3.getString(1));
 						//================================================= Traitement des resultats dans la console
@@ -132,27 +134,15 @@ public class S_controlLogin extends HttpServlet {
 						appli.getContentPane().add(cn.getMessage2());
 						appli.getContentPane().repaint();
 						appli.getContentPane().revalidate();
-
 					}
 				} // Fin if (rs2.next())
 			}
-
 				catch (SQLException efc){
 					System.out.println("ControlLogin : Erreur ControlLogin");
 					efc.printStackTrace();
 					}
 
 		}
-
-		}
-
-
-
-
-
-		
-		
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
