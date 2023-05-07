@@ -1,4 +1,4 @@
-package view;
+ package view;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/VueStagiaire")
 public class VueStagiaire extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -27,13 +27,14 @@ public class VueStagiaire extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setContentType("text/html");
 		response.setCharacterEncoding("utf8");
 		PrintStream out = new PrintStream(response.getOutputStream());
-		out.println("<html><head><title>VueStagiaire</title></head>");
+		out.println("<!DOCTYPE html><html><head><title>VueStagiaire</title></head>");
 		out.println("<body>");
 		out.println("<H1>Page Stagiaire</H1>");
 		out.println("</body>");
@@ -43,6 +44,7 @@ public class VueStagiaire extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

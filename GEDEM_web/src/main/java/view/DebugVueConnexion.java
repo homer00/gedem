@@ -8,18 +8,20 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class VueConnexion
+ * Servlet implementation class DebugVueConnexion
  */
-@WebServlet("/VueConnexion")
-public class VueConnexion extends HttpServlet {
+@WebServlet("/DebugVueConnexion")
+public class DebugVueConnexion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
+	//protected HttpSession session = S_controlLogin.getSession();
+	protected HttpSession session;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public VueConnexion() {
+    public DebugVueConnexion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +33,19 @@ public class VueConnexion extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
-		doPost(request, response);
 
+		session = request.getSession();
+
+		String pass = (String)session.getAttribute("str_pass_session");
+		String login = (String)session.getAttribute("str_login_session");
+		//session.getValue(str_login_session);
+		response.setContentType("text/html");
+		PrintStream out = new PrintStream(response.getOutputStream());
+		out.println("<html><head><title>VueConnexion</title></head>");
+		out.println("<body style='background-color: antiquewhite;'>");
+		out.println("<p>C'est le debug !</p>");
+		out.println("Le login est : "+login+" et le mot de passe : "+pass+"<br>");
+		out.println("</body></html>");
 	}
 
 	/**
@@ -41,22 +54,7 @@ public class VueConnexion extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
-
-		response.setContentType("text/html");
-		PrintStream out = new PrintStream(response.getOutputStream());
-		out.println("<!DOCTYPE html><html><head><title>VueConnexion</title></head>");
-		out.println("<body>");
-		out.println("<form action='S_controlLogin' method='post'>");
-		out.println("<table><tr><td>");
-		out.println("<Label>Nom d'utilisateur : </label></td>");
-		out.println("<td><input type='text' name='uLogin'></td></tr>");
-		out.println("<tr><td><Label>Mot de passe : </label></td>");
-		out.println("<td><input type='password' name='uPassword'></td></tr>");
-		out.println("<tr><td><input type='submit' name='submit' value='Connexion'></td>");
-		out.println("</tr></table>");
-		out.println("</form>");
-		out.println("</body></html>");
-
+		doGet(request, response);
 	}
+
 }
