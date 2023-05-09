@@ -21,8 +21,9 @@ public class ControlFormPersonne {
 	private ArrayList<Personne> al_personne;
 	private String val1_role="aucun"; // role sélectionné dans la JComboBox
 	private String val1_roleBase; // correspond à nomRole de la table role
-	private int val1;
-	private String val2,val3,val4,val5="0",val6;
+	private int val1; //prendra la valeur de idRole (ligne 109)
+	private String val2="",val3="";
+	private String val4="",val5="0",val6="";
 	private char[] val7;
 	private String val7_str, val5new;
 	private App appli;
@@ -38,6 +39,16 @@ public class ControlFormPersonne {
 	public ControlFormPersonne(ViewFormPersonne vfp, App appli) {
 		this.vfp = vfp;
 		this.appli=appli;
+		
+		this.val2 = vfp.getJt_nom().getText(); // nom
+		this.val3 = vfp.getJt_prenom().getText(); // prenom
+		this.val4 = vfp.getJt_mail().getText(); // mail
+		this.val5 = vfp.getJt_tel().getText(); // Tel
+		this.val6 = vfp.getJt_login().getText(); // login
+		this.val7 = vfp.getJt_pass().getPassword(); // password
+		val7_str = new String(val7);
+		System.out.println("char val7 2str (password) : "+val7_str); // Sysout du password pour test
+		
 		cc = new ControlConnection();
 
 		if (!flag_al_personne) {		// On créer une liste seulement si elle n'existe pas déjà.
@@ -59,22 +70,15 @@ public class ControlFormPersonne {
 	 */
 	public void ajouterPersonne() {
 
-		String val1_role = (String)vfp.getJc_role().getSelectedItem(); // recup sélection JComboBox
-
+		this.val1_role = (String)vfp.getJc_role().getSelectedItem(); // recup sélection JComboBox
 		System.out.println("val1_role dans méthode ajouterPersonne() : "+val1_role);
-		String val2 = vfp.getJt_nom().getText(); // nom
-		String val3 = vfp.getJt_prenom().getText(); // prenom
-		String val4 =vfp.getJt_mail().getText(); // mail
-		String val5 =vfp.getJt_tel().getText(); // Tel
-		String val6 =vfp.getJt_login().getText(); // login
-		char[] val7 =vfp.getJt_pass().getPassword(); // password
-		val7_str =new String(val7);
-		System.out.println("char val7 2str (password) : "+val7_str); // Sysout du password pour test
+		
 
 		if (vfp.isFlag_btnf1()) { // si le bouton du formulaire a été actionné
 			System.out.println("Bouton actionne : "+vfp.isFlag_btnf1());
+			vfp.setJmessageLabel(""); // on efface le précédent message.
 			if (!val5.isEmpty()) { // si un Tel a été entré
-				System.out.println("val5 empty ? : "+val5.isEmpty());
+				//System.out.println("val5 empty ? : "+val5.isEmpty());
 				if (val5.length()>12) { // contrôle de saisie num. de Téléphone
 					System.out.println("val5 > 12 - taille  ? : "+val5.length());
 					val5new = verifTel(val5); // appel à la méthode un peu plus bas.
@@ -117,7 +121,8 @@ public class ControlFormPersonne {
 			System.out.println("ControlFormPersonne : Erreur lors de la recuperation de idRole");
 		}
 		verifSelectionRole(); // fonction qui vérifie si un rôle a été selectionné.
-
+		verifNomPrenom(); // vérif nom, prénom renseignés
+		
 		if (flag_validation ) { // si le formulaire a été correctement renseigné
 
 
@@ -225,6 +230,19 @@ public class ControlFormPersonne {
 		}
 		return res_verifTel;
 
+	}
+	
+	//============================ METHODE verifNomPrenom
+	public void verifNomPrenom() {
+		if (val2.length()<2 || val3.length()<2) {
+			System.out.println("Les champs nom ou prénom ne sont pas remplis");
+			System.out.println("val2.length() : "+val2.length()+"\tval3.length() : "+val3.length());
+			flag_validation = false;
+			vfp.setJmessageLabelColor("red");
+			vfp.setJmessageLabel("Vérifiez les champs nom/prénom.");
+			vfp.setImage(new ImageIcon("./img/eleve2r.png"));
+
+		}
 	}
 
 	//============================ ACCESSEURS
