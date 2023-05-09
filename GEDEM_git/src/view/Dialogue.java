@@ -25,16 +25,6 @@ public class Dialogue extends JPanel implements ActionListener {
 
 	public Dialogue() {
 		super();
-		/*
-		JFrame jfd = new JFrame("Dialogue");
-		dim = new Dimension(300,180);
-		jfd.setDefaultCloseOperation(3);
-		jfd.setPreferredSize(dim);
-		//setLayout(null);
-		jfd.setLocationRelativeTo(null);
-		jfd.setResizable(false);
-		jfd.setVisible(true);
-		*/
 
 		jd1 = new JDialog(new JFrame());
 		jd1.setLayout(new FlowLayout());

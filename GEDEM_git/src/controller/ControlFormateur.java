@@ -24,6 +24,8 @@ public class ControlFormateur {
 	private Vector<Vector> leVector2;
 	private String leVectorStr;
 	public ArrayList<String> monArrayList;
+	
+	//==================================================== CONSTRUCTEUR
 	public ControlFormateur(App appli,ViewListeFormation vf) {
 
 		listFormation = new ArrayList<>();

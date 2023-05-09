@@ -10,6 +10,7 @@ import view.App;
 import view.ViewConnexion;
 import view.ViewFormPersonne;
 import view.ViewListeFormation;
+import view.ViewListeStagiaire;
 //import view.ViewListeStagiaire;
 
 
@@ -21,6 +22,7 @@ public class ControlLogin {
 	//private ViewListeStagiaire vls;
 	private ViewFormPersonne vfp;
 	private ViewListeFormation vform;
+	private ViewListeStagiaire vls;
 
 	private int flag;
 
@@ -89,8 +91,8 @@ public class ControlLogin {
 				switch (flag) {
 				case 1:
 					// cas "User" --> Stagiaire
-	//vls = new ViewListeStagiaire(appli);
-	//appli.getContentPane().add(vls);
+					vls = new ViewListeStagiaire(appli);
+					appli.getContentPane().add(vls);
 					break;
 				case 2:
 					// cas "Admin"

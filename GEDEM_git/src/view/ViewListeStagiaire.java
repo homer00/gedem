@@ -19,31 +19,33 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
-import controller.ControlFormateur;
+//import controller.ControlFormateur;
+import controller.ControlStagiaire;
 
 
-public class ViewListeFormation extends JPanel implements ActionListener{
+public class ViewListeStagiaire extends JPanel implements ActionListener {
 
-	private ControlFormateur cf;
+	private ControlStagiaire cs;
 	String res;
 	private JLabel labelDate;
 	private JLabel labelf1;
 	private JTable tableFormation;
 	private JScrollPane scrollpane;
 
-	public ViewListeFormation(App appli) {
+	public ViewListeStagiaire(App appli) {
+		
 		setBorder(BorderFactory.createSoftBevelBorder(1, Color.yellow,Color.red,Color.blue,Color.green));
 
 		this.setLayout(new GridLayout(2,2,20,30));
 
-		labelf1 = new JLabel("Liste des formations");
+		labelf1 = new JLabel("Liste des Stagiaires - vue Stagiaire");
 		this.add(labelf1);
-		cf = new ControlFormateur(appli,this);
+		cs = new ControlStagiaire(appli,this);
 
-		Vector<Vector> leVector = cf.showTableFormationJT();
+		Vector<Vector> leVector = cs.showTableFormationJT();
 
-		Vector<String> v = new Vector<>(cf.getEnteteFormation());
-		for (String element : cf.getEnteteFormation()) {
+		Vector<String> v = new Vector<>(cs.getEnteteFormation());
+		for (String element : cs.getEnteteFormation()) {
 			System.out.println(element);
 		}
 		System.out.println("leVector :"+leVector);
@@ -51,7 +53,6 @@ public class ViewListeFormation extends JPanel implements ActionListener{
 		this.scrollpane = new JScrollPane(tableFormation);
 		scrollpane.setPreferredSize(new Dimension(200,100));
 		add(scrollpane,BorderLayout.CENTER);
-
 	}
 
 // ========================================= ACCESSEURS

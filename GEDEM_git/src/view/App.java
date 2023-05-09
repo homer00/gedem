@@ -13,7 +13,7 @@ public class App extends JFrame{
 	//private static ControlerConnection cc;
 
 	public App(String str) { // ============================= CONSTRUCTEUR
-		super(str);
+		super(str); // str : Chaine qui représente le titre de la fenêtre
 		dim = new Dimension(800,480);
 		//dim = new Dimension(this.getSize());
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -31,8 +31,10 @@ public class App extends JFrame{
 
 		ViewConnexion cn = new ViewConnexion(appli);
 		// appli en paramètre de l'instance de ViewConnexion (vue)
+Dialogue d = new Dialogue();
+appli.getContentPane().add(d);
 
-		appli.getContentPane().add(cn);
+		//appli.getContentPane().add(cn);
 
 		appli.pack();
 		appli.centre(); // centrage de la JFrame, après le pack()
@@ -67,7 +69,7 @@ public class App extends JFrame{
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension screenSize = tk.getScreenSize();
         int x = (screenSize.width - windowsSize.width) / 2;
-        int y = (screenSize.height- windowsSize.height)/ 2;
+        int y = (screenSize.height- windowsSize.height) / 2;
         this.setLocation(x, y);
     }
 }
