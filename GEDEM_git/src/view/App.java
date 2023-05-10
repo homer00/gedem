@@ -7,7 +7,7 @@ import javax.swing.JFrame;
 
 public class App extends JFrame{
 
-	private App app;
+	private static App appli; // 09/05 : passage de appli en static
 	private Dimension dim;
 	//private String textFrame;
 	//private static ControlerConnection cc;
@@ -27,21 +27,22 @@ public class App extends JFrame{
 	public static void main(String[] args) { // ================ MAIN
 
 
-		App appli = new App("Application principale - GEDEM_git");
+		//App appli = new App("Application principale - GEDEM_git");
+		appli = new App("Application principale - GEDEM_git");
 
 		ViewConnexion cn = new ViewConnexion(appli);
 		// appli en paramètre de l'instance de ViewConnexion (vue)
-Dialogue d = new Dialogue();
-appli.getContentPane().add(d);
+//Dialogue d = new Dialogue();
+//appli.getContentPane().add(d);
 
-		//appli.getContentPane().add(cn);
+		appli.getContentPane().add(cn);
 
 		appli.pack();
 		appli.centre(); // centrage de la JFrame, après le pack()
 
 
 	}
-
+/*
 	public App getApp() {
 		return app;
 	}
@@ -58,11 +59,8 @@ appli.getContentPane().add(d);
 		return dim;
 	}
 
-/*
-	public void setDim(Dimension dim) {
-		this.dim = dim;
-	}
-	*/
+*/
+	
 	public void centre() {
 
         Dimension windowsSize = this.getSize( );

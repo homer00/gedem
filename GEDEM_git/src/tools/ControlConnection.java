@@ -14,8 +14,8 @@ public class ControlConnection {
 	private String dao_strClassName = "com.mysql.cj.jdbc.Driver";
 	private int sqlPort = 3306;
 	//private String loginDb = "root";
-	private String loginDb = "root";
-	private String passwordDb = "root";
+	private String loginDb = "gedemsql2";
+	private String passwordDb = "gedemsql2";
 	private String strUrl = "jdbc:mysql://"+sql_host+":"+sqlPort+"/" +  dbName+"?useSSL=false&serverTimezone=UTC";
 	private Connection conn;
 	private Statement st;
