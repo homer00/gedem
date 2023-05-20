@@ -149,8 +149,9 @@ public class ViewConnexion extends JPanel implements ActionListener {
 			// ça sert à rien mais c'est tellement bien...
 
 			label.setForeground(Color.RED);
-			label.setFont(new Font("serif", Font.PLAIN, 42));
+			label.setFont(new Font("serif", Font.PLAIN, 12));
 			setBackground(new Color(200,130,220));
+			label.setText(getUPassword().toString());
 			this.appli.getContentPane().add(getMessage2());
 
 		}

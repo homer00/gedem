@@ -11,6 +11,7 @@ import view.ViewConnexion;
 import view.ViewFormPersonne;
 import view.ViewListeFormation;
 import view.ViewListeStagiaire;
+import view.Fenetre;
 //import view.ViewListeStagiaire;
 
 
@@ -23,6 +24,7 @@ public class ControlLogin {
 	private ViewFormPersonne vfp;
 	private ViewListeFormation vform;
 	private ViewListeStagiaire vls;
+	private Fenetre f;
 
 	private int flag;
 
@@ -96,7 +98,8 @@ public class ControlLogin {
 					break;
 				case 2:
 					// cas "Admin"
-					vfp = new ViewFormPersonne(appli);
+					//vfp = new ViewFormPersonne(appli);
+					f = new Fenetre();
 					appli.getContentPane().add(vfp);
 					break;
 				case 3:
