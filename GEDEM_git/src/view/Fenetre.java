@@ -59,19 +59,7 @@ public class Fenetre extends JFrame {
         JPanel panel3=new JPanel();
      
         JPanel panel5=new JPanel();
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-		
+
         panel1.setLayout(null);
         panel2.setLayout(null);
         panel3.setLayout(null);
@@ -88,21 +76,7 @@ public class Fenetre extends JFrame {
         panel5.setBackground(Color.WHITE);
         panel5.setBounds(0,140,1020,520);
        
-        
-        
-        
-        
-        
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
+   
         
         c.add(panel1);
         c.add(panel2);
@@ -130,34 +104,12 @@ public class Fenetre extends JFrame {
         JButton btn7 = new JButton(new ImageIcon("./images/cloche.png"));
         JButton btn8 = new JButton(new ImageIcon("./images/mail.png"));
         JButton btn9 = new JButton(new ImageIcon("./images/troisBar.png"));
-        
-        
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+    
         btn1.setFont(new Font("Arial", Font.BOLD, 15));
         btn2.setFont(new Font("Arial", Font.BOLD, 15));
         btn3.setFont(new Font("Arial", Font.BOLD, 15));
         btn4.setFont(new Font("Arial", Font.BOLD, 15));
         btn5.setFont(new Font("Arial", Font.BOLD, 15));
-        
-        
-        
-        
-        
-        
         
         
         

@@ -32,6 +32,8 @@ public Personne(String n, String p, String m, String t, String login, String pas
 		this.prenom = p;
 		this.mail = m;
 		this.tel = t;
+		this.login = login;
+		this.password = password;
 
 
 	}
@@ -50,6 +52,8 @@ public Personne(int idRole, String n, String p, String m, String t, String login
 		this.prenom = p;
 		this.mail = m;
 		this.tel = t;
+		this.login=login;
+		this.password=password;
 
 	}
 
@@ -109,6 +113,11 @@ public void show1Personn() {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-
+ public String getLogin () {
+	 return this.login;
+ }
+ public String getPassword () {
+	 return this.password;
+ }
 
 }

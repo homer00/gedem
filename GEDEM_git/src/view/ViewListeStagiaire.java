@@ -29,30 +29,38 @@ public class ViewListeStagiaire extends JPanel implements ActionListener {
 	String res;
 	private JLabel labelDate;
 	private JLabel labelf1;
-	private JTable tableFormation;
+	private JTable tableStagiaire;
 	private JScrollPane scrollpane;
 
 	public ViewListeStagiaire(App appli) {
 		
 		setBorder(BorderFactory.createSoftBevelBorder(1, Color.yellow,Color.red,Color.blue,Color.green));
 
-		this.setLayout(new GridLayout(2,2,20,30));
+		this.setLayout(new GridLayout(2,2,10,30));
 
 		labelf1 = new JLabel("Liste des Stagiaires - vue Stagiaire");
 		this.add(labelf1);
+		/*
+		JLabel labeld1 = new JLabel(""); // pour affichage Date
+		setLabelDate(labeld1); // méthode setLabelDate de la partie "Accesseurs"
+		this.add(labeld1);
+		*/
 		cs = new ControlStagiaire(appli,this);
 
-		Vector<Vector> leVector = cs.showTableFormationJT();
-
-		Vector<String> v = new Vector<>(cs.getEnteteFormation());
+		Vector<Vector> leVector = cs.showTableFormationJT(); // leVector : contient l'ensemble des lignes du tableau de Stagiaires
+		//showTableFormation est une méthode de la classe ControlStagiaire, qui retourne un objet de type Vector
+		Vector<String> v = new Vector<>(cs.getEnteteFormation()); // v : contient la liste des entêtes du tableau (rsMetaData)
 		for (String element : cs.getEnteteFormation()) {
-			System.out.println(element);
+			System.out.print(element+" - ");
 		}
-		System.out.println("leVector :"+leVector);
-		tableFormation = new JTable(leVector,v);
-		this.scrollpane = new JScrollPane(tableFormation);
-		scrollpane.setPreferredSize(new Dimension(200,100));
+		System.out.println("\n[ViewListeStagiaire]leVector :"+leVector);
+		tableStagiaire = new JTable(leVector,v);
+		this.scrollpane = new JScrollPane(tableStagiaire);
+		scrollpane.setPreferredSize(new Dimension(200,200));
 		add(scrollpane,BorderLayout.CENTER);
+		
+		//appli.setSize(getMaximumSize()); // pour maximiser l'affichage
+		
 	}
 
 // ========================================= ACCESSEURS
@@ -64,7 +72,8 @@ public class ViewListeStagiaire extends JPanel implements ActionListener {
 		DateFormat monFormat = new SimpleDateFormat("dd/MM/YYYY HH:mm:ss");
 		Date aujourdhui = Calendar.getInstance().getTime();
 		String resultat = monFormat.format(aujourdhui);
-		this.labelDate.setText(resultat);
+		System.out.println("resultat : "+resultat);
+		//this.labelDate.setText(resultat);
 	}
 // ================================================= ACTIONPERFORMED
 	@Override

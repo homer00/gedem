@@ -8,10 +8,11 @@ import javax.swing.JTextField;
 import tools.ControlConnection;
 import view.App;
 import view.ViewConnexion;
+import view.ViewFormCreneau;
 import view.ViewFormPersonne;
 import view.ViewListeFormation;
 import view.ViewListeStagiaire;
-import view.Fenetre;
+//import view.Fenetre;
 //import view.ViewListeStagiaire;
 
 
@@ -24,8 +25,8 @@ public class ControlLogin {
 	private ViewFormPersonne vfp;
 	private ViewListeFormation vform;
 	private ViewListeStagiaire vls;
-	private Fenetre f;
-
+	private ViewFormCreneau vfc;
+	//private Fenetre f;
 	private int flag;
 
 	// /** CONSTRUCTEUR =========================
@@ -98,8 +99,8 @@ public class ControlLogin {
 					break;
 				case 2:
 					// cas "Admin"
-					//vfp = new ViewFormPersonne(appli);
-					f = new Fenetre();
+					vfp = new ViewFormPersonne(appli);
+					//f = new Fenetre();
 					appli.getContentPane().add(vfp);
 					break;
 				case 3:
@@ -117,12 +118,18 @@ public class ControlLogin {
 			else { // Affichage console si login et password ne "match" pas avec la BDD
 				System.out.println("ACCESS REFUSE console");
 
-				appli.getContentPane().add(cn.getMessage2());
-				appli.getContentPane().repaint();
-				appli.getContentPane().revalidate();
+				//appli.getContentPane().add(cn.getMessage2());
 
 			}
 		} // Fin if (rs2.next())
+		if (loginStr.equals("test")) { // ========================== CAS OU login = "test" ----> formulaire créneaux
+			appli.getContentPane().removeAll();
+			// on supprime ce qu'il y avait précédemment sur le JPanel
+			vfc = new ViewFormCreneau(appli);
+			appli.getContentPane().add(vfc); // on affiche le formulaire création de créneaux pour Login quelconque. 
+			appli.getContentPane().repaint();
+			appli.getContentPane().revalidate();
+		}
 	}
 
 		catch (SQLException efc){

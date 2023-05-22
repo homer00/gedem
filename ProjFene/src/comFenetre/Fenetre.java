@@ -54,18 +54,7 @@ public class Fenetre extends JFrame {
         JPanel panel4=new JPanel();
         JPanel panel5=new JPanel();
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-		
+
         panel1.setLayout(null);
         panel2.setLayout(null);
         panel3.setLayout(null);
@@ -82,38 +71,20 @@ public class Fenetre extends JFrame {
         panel4.setBounds(0,100,180,565);
         panel5.setBackground(Color.WHITE);
         panel5.setBounds(180,140,1010,520);
-       
-        
-        
-        
+   
         JLabel label10 = new JLabel("TABLEAU DE BORD", JLabel.CENTER);
         JLabel label11 = new JLabel("FORMATION", JLabel.CENTER);
         JLabel label12 = new JLabel("FORMATEURS", JLabel.CENTER);
         JLabel label13 = new JLabel("STAGIAIRES", JLabel.CENTER);
         JLabel label14 = new JLabel("PLANNING", JLabel.CENTER);
         JLabel label15 = new JLabel("MATIERES", JLabel.CENTER);
-        
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         c.add(panel1);
         c.add(panel2);
         c.add(panel3);
         c.add(panel4);
         c.add(panel5);	
-        
-        
-        
-        
-        
+
         panel1.setLayout(new FlowLayout(FlowLayout.RIGHT));
         panel2.setLayout(new FlowLayout(FlowLayout.RIGHT));
         panel3.setLayout(new FlowLayout(FlowLayout.CENTER, 15,20));
@@ -143,36 +114,13 @@ public class Fenetre extends JFrame {
         JButton btn19 = new JButton("D");
         JButton btn20 = new JButton("E");
         JButton btn21 = new JButton("F");
-        
-       
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+  
         btn1.setFont(new Font("Arial", Font.BOLD, 15));
         btn2.setFont(new Font("Arial", Font.BOLD, 15));
         btn3.setFont(new Font("Arial", Font.BOLD, 15));
         btn4.setFont(new Font("Arial", Font.BOLD, 15));
         btn5.setFont(new Font("Arial", Font.BOLD, 15));
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         btn1.setPreferredSize(new Dimension(180, 60));
         btn2.setPreferredSize(new Dimension(180, 60));
         btn3.setPreferredSize(new Dimension(180, 60));
@@ -302,18 +250,11 @@ public class Fenetre extends JFrame {
         panel4.add(btn16);
         panel4.add(btn17);
         panel4.add(btn18);
-        
-        
+ 
      
     setVisible(true);
         
-   
-    
-    
-	
-	
-	
-	
+
 
 	 btn10.addActionListener(new ActionListener(){
 		 
@@ -487,37 +428,7 @@ public class Fenetre extends JFrame {
 	        }
 	 
 	    });
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	 	 
 	 
 	    
 }	

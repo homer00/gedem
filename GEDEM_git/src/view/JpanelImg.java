@@ -1,7 +1,6 @@
 package view;
 
-// Classe qui permet uniquement d'afficher une image de fond à l'intérieur
-// d'un JPanel
+// Classe qui permet uniquement d'afficher une image de fond à l'intérieur d'un JPanel
 import java.awt.Graphics;
 import java.awt.Image;
 

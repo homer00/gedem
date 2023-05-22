@@ -26,12 +26,15 @@ import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
+
+import tools.ControlConnection;
 public class PannAdministrateur
-{   private static Connection con;
+{   
+//private ControlConnection con;
 private JButton btn1;
 private JButton btn2;
 
-public static JPanel newJPanel(){
+public static JPanel newJPanel(App appli){
 
 JPanel panel11 = new JPanel();
 panel11.setLayout(null);
@@ -178,8 +181,8 @@ text7.setBounds(100, 337, 130, 25);
 {
   try 
 {
-	
-	  con = Connexion.getCon();
+	  con = new ControlConnection();
+	  //con = ControlConnection.getConn();
 	  
 	  btn1.addActionListener(new ActionListener(){
 			 

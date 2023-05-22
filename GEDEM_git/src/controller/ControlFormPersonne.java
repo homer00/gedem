@@ -106,7 +106,7 @@ public class ControlFormPersonne {
 		try { // on recupere l'idRole (int) correspondant au rôle sélectionné dans la JComboBox.
 			ResultSet rs_val1 = cc.getStatement().executeQuery(req_val1);
 			if (rs_val1.next()) { // si un enregistrement correspond
-				this.val1 = rs_val1.getInt(1);
+				this.val1 = rs_val1.getInt(1); // val1, type Entier, correspond à idRole de la table "role"
 				System.out.println("Affectation de valeur pour val1 : "+ val1);
 			}
 			else {
@@ -123,19 +123,21 @@ public class ControlFormPersonne {
 		verifSelectionRole(); // fonction qui vérifie si un rôle a été selectionné.
 		verifNomPrenom(); // vérif nom, prénom renseignés
 		
-		if (flag_validation ) { // si le formulaire a été correctement renseigné
+	if (flag_validation ) { // si le formulaire a été correctement renseigné
 
 
 			String req="INSERT INTO personne (idRole,nom,prenom,mail,tel,login,password)"
 					+ " values ("+val1+",'"+val2+"','"+val3+"','"+val4+"','"+val5new+"','"+val6+"','"+val7_str+"');";
 			String req2="select * from personne where nom='"+val2+"';";
 			try {
+				//===================================== INSERTION TABLE personne ===============
+				
 				System.out.println("req :"+req);
 				System.out.println("req2 :"+req2);
-				cc.getStatement().executeUpdate(req);
+				cc.getStatement().executeUpdate(req); // Insertion dans la table "personne"
 
 
-				ResultSet rsi = cc.getStatement().executeQuery(req2); // insertion dans la BDD
+				ResultSet rsi = cc.getStatement().executeQuery(req2); // ResultSet des personnes dont le nom est val2 
 
 				while (rsi.next()) { // on ajoute l'entrée dans l'ArrayList al_personne
 					al_personne.add(new Personne(val1,val2,val3,val4,val5,val6,val7_str));
@@ -153,12 +155,14 @@ public class ControlFormPersonne {
 				System.out.println("ControlFormPersonne : Erreur dans l'insertion du formulaire (ajouter personne)");
 			}
 			//Personne pers = new Personne();
-
+			
+			//===================================== INSERTION TABLE h_personne_stagiaire ===============
+			
 			if (!this.val1_role.equals("") && this.val1>3) { // si idPersonne existe et est non nul
 				System.out.println("val1 (idPersonne) : "+val1); // Affichage console
 				String req_stagiaire="INSERT INTO h_personne_stagiaire (idPersonne) VALUES ("+val1+");";
 				try {
-					cc.getStatement().executeUpdate(req_stagiaire);
+					cc.getStatement().executeUpdate(req_stagiaire); // Insertion dans la table h_personne_stagiaire
 				}
 				catch (SQLException e) {
 					System.out.println("ControlFormPersonne : problème pour l'insertion de l'idPersonne dans la table h_personne_stagiaire");
@@ -166,13 +170,37 @@ public class ControlFormPersonne {
 					}
 
 			}
+			
+			//===================================== INSERTION TABLE h_personne_administratif ===============
+			
+			if (!this.val1_role.equals("") && this.val1>3) { // si idPersonne existe et est non nul
+				System.out.println("val1 (idPersonne) : "+val1); // Affichage console
+				String req_stagiaire="INSERT INTO h_personne_administratif (idPersonne) VALUES ("+val1+");";
+				try {
+					cc.getStatement().executeUpdate(req_stagiaire); // Insertion dans la table h_personne_stagiaire
+				}
+				catch (SQLException e) {
+					System.out.println("ControlFormPersonne : problème pour l'insertion de l'idPersonne dans la table h_personne_stagiaire");
+					e.printStackTrace();
+					}
+
+		
+			
+			
 			System.out.println("\tInsertion effectuée dans la BDD");
 			vfp.setJmessageLabelColor("white");
 			vfp.setJmessageLabel("Profil enregistré dans la base.");
-		}// Fin if (flag_validation)
+			}
+			}// Fin if (flag_validation)
+		
 		else {
+			System.out.println("[ControlFormPersonne], section INSERTION TABLE h_personne_stagiaire, bloc else {}");
 			System.out.println("flag_validation : "+flag_validation);
 		}
+		
+	
+		
+		
 		// Quelques LOGS console...
 		System.out.println("val1_role : "+val1_role+"\tval2 : "+val2+"\tval3 : "+val3);
 	}
