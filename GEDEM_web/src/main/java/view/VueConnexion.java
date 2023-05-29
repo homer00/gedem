@@ -23,7 +23,6 @@ public class VueConnexion extends HttpServlet {
         super();
         // TODO Auto-generated constructor stub
     }
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -32,7 +31,6 @@ public class VueConnexion extends HttpServlet {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		doPost(request, response);
-
 	}
 
 	/**
@@ -42,7 +40,6 @@ public class VueConnexion extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
-
 		response.setContentType("text/html");
 		PrintStream out = new PrintStream(response.getOutputStream());
 		out.println("<!DOCTYPE html><html><head><title>VueConnexion</title></head>");
@@ -57,6 +54,5 @@ public class VueConnexion extends HttpServlet {
 		out.println("</tr></table>");
 		out.println("</form>");
 		out.println("</body></html>");
-
 	}
 }

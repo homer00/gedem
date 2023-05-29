@@ -18,7 +18,6 @@ public class Formation {
 		this.finFormation = ff;
 		//this.commentFormation = cf;
 		//this.listFormation = new ArrayList<Formation>();
-
 	}
 
 	public int getIdFormation() {

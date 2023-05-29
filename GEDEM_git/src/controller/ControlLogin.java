@@ -12,6 +12,7 @@ import view.ViewFormCreneau;
 import view.ViewFormPersonne;
 import view.ViewListeFormation;
 import view.ViewListeStagiaire;
+import view.ViewLog;
 //import view.Fenetre;
 //import view.ViewListeStagiaire;
 
@@ -23,6 +24,7 @@ public class ControlLogin {
 	//ArrayList<Login> listeLogin;
 	//private ViewListeStagiaire vls;
 	private ViewFormPersonne vfp;
+	private ViewLog vl;
 	private ViewListeFormation vform;
 	private ViewListeStagiaire vls;
 	private ViewFormCreneau vfc;
@@ -99,9 +101,13 @@ public class ControlLogin {
 					break;
 				case 2:
 					// cas "Admin"
-					vfp = new ViewFormPersonne(appli);
+					
+					// ========================================================== LOG	
+				//	vfp = new ViewFormPersonne(appli);
+					vl = new ViewLog(appli);
+					
 					//f = new Fenetre();
-					appli.getContentPane().add(vfp);
+					appli.getContentPane().add(vl);
 					break;
 				case 3:
 					// cas "Formateur"
@@ -122,6 +128,14 @@ public class ControlLogin {
 
 			}
 		} // Fin if (rs2.next())
+		// ========================================================== LOG
+		// Traitement de l'échec de connexion
+		else {
+			String req_log = "INSERT INTO log (login_log, password_log,date_log) VALUES ('"+loginStr+"', '"+passwordStr+"',NOW());";
+			cc.getStatement().executeUpdate(req_log);
+			System.out.println("Execution requete pour les logs");
+		}
+		
 		if (loginStr.equals("test")) { // ========================== CAS OU login = "test" ----> formulaire créneaux
 			appli.getContentPane().removeAll();
 			// on supprime ce qu'il y avait précédemment sur le JPanel
@@ -139,6 +153,8 @@ public class ControlLogin {
 
 }
 
+	
+	
 }
 
 
